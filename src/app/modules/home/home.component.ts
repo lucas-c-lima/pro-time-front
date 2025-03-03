@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 import { AuthRequest } from 'src/app/models/interface/user/auth/AuthRequest';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -20,7 +21,8 @@ export class HomeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private messageService: MessageService
   ) {}
 
   onSubmitLoginForm(): void {
@@ -29,12 +31,33 @@ export class HomeComponent {
       .subscribe({
         next: (response) => {
           if (response) {
-            this.cookieService.set('USER_INFO', response?.token);
+            const userId = this.userService.getUserIdFromToken(response.token);
+            const userProfile = this.userService.getProfileFromToken(response.token);
+
+            this.cookieService.set('USER_TOKEN', response?.token);
+            this.cookieService.set('USER_ID', userId?.toString())
+            this.cookieService.set('USER_PROFILE', userProfile?.toString())
 
             this.loginForm.reset();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: "Login realizado com sucesso!",
+              life: 2000
+            })
           }
         },
-        error: (err) => console.log(err)
+        error: (err) =>{
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: "Erro ao fazer login!",
+            life: 2000
+          })
+
+          console.log(err)
+        }
+
       })
     }
   }
