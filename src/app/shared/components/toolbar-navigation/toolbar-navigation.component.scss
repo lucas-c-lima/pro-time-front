@@ -1,4 +1,8 @@
 ::ng-deep .p-toolbar{
-  margin: -0.6rem;
+  margin-top: -0.6rem;
   border-radius: 0px !important;
+  background-color: #222 !important;
+  border: none;
+  border-bottom: solid 1px #444;
+  width: 100%;
 }

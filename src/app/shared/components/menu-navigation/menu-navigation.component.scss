@@ -1,0 +1,52 @@
+::ng-deep .menu-container {
+  height: 100vmin;
+  width: 200px;
+  background-color: #222;
+  margin: -0.5rem;
+  margin-right: 0;
+  border-right: solid 1px #444;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+}
+
+::ng-deep .menu-container button{
+  width: 100%;
+  background-color: transparent;
+  font-size: 16px;
+  color: white;
+  padding: 5px;
+  text-align: left;
+  border-radius: 10px;
+  border: none;
+  transition: .1s;
+}
+::ng-deep .menu-container button i{
+  font-size: 12px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+::ng-deep .menu-container button:hover{
+  background-color: #444;
+}
+
+::ng-deep .add-hours{
+  background-color: #333 !important;
+  border-radius: 20px !important;
+  border: solid 1px #666 !important;
+  margin-left: -1px;
+  margin-bottom: 10px;
+}
+
+::ng-deep .add-hours:hover{
+  background-color: #444 !important;
+}
+
+::ng-deep .add-hours i{
+  background-color: #C3B1E1;
+  border-radius: 100%;
+}
+
+
