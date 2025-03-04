@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 import { GetAllProjectsResponse } from 'src/app/models/interface/projects/response/GetAllProjectsResponse';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
 import { ProjectsDataTransferService } from 'src/app/shared/services/projects/projects-data-transfer.service';
@@ -10,8 +11,9 @@ import { ProjectsDataTransferService } from 'src/app/shared/services/projects/pr
   // TODO apagar caso não precise mudar estilos (quase impossivel mas né)
   styleUrls: ['./dashboard-home.component.scss']
 })
-export class DashboardHomeComponent implements OnInit{
+export class DashboardHomeComponent implements OnInit, OnDestroy{
   public projectsList: Array<GetAllProjectsResponse> = []
+  private destroy$ = new Subject<void>();
 
   constructor(
     private projectsService: ProjectsService,
@@ -26,6 +28,7 @@ export class DashboardHomeComponent implements OnInit{
   getProjectsDatas(): void {
     this.projectsService
     .getAllProjects()
+    .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
         if (response.length > 0){
@@ -42,5 +45,9 @@ export class DashboardHomeComponent implements OnInit{
         })
       }
     })
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
