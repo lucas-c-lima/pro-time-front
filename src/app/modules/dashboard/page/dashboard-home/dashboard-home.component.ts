@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { GetAllProjectsResponse } from 'src/app/models/interface/projects/response/GetAllProjectsResponse';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
+import { ProjectsDataTransferService } from 'src/app/shared/services/projects/projects-data-transfer.service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -14,7 +15,8 @@ export class DashboardHomeComponent implements OnInit{
 
   constructor(
     private projectsService: ProjectsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private projectsDtService: ProjectsDataTransferService
   ){}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class DashboardHomeComponent implements OnInit{
       next: (response) => {
         if (response.length > 0){
           this.projectsList = response;
-          console.log('DADOS: ', this.projectsList)
+          this.projectsDtService.setProjectsDatas(this.projectsList);
         }
       }, error: (err) => {
         console.log(err);
