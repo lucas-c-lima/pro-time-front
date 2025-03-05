@@ -15,11 +15,13 @@ export class ActivitiesTableComponent {
   public activitySelected!: GetAllActivitiesResponse;
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityEvent = ActivityEvent.EDIT_ACTIVITY_EVENT;
+  public finishActivityEvent = ActivityEvent.FINISH_ACTIVITY_EVENT;
 
-  handleProductEvent(action: string, id?: string): void {
+  handleActivityEvent(action: string, id?: string): void {
     if (action && action !== ''){
       const activityEventData = id && id !== '' ? {action, id} : {action}
       this.activityEvent.emit(activityEventData);
     }
   }
+
 }

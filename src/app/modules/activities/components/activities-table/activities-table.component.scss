@@ -3,6 +3,10 @@
 ::ng-deep .p-card-body{
   height: 100%;
 }
+
+::ng-deep tr{
+  cursor: pointer;
+}
 ::ng-deep .card-content{
   height: 100%;
   display: block;
@@ -24,6 +28,7 @@
   font-size: 14px;
   color: white;
   padding: 5px;
+  padding-right: 10px;
   text-align: left;
   border-radius: 10px;
   border: none;
@@ -36,4 +41,16 @@
   font-size: 16px;
   padding: 5px;
   margin-right: 5px;
+}
+
+::ng-deep .activity-mark{
+  opacity: .7;
+  cursor: pointer;
+  transition: .2s;
+}
+::ng-deep .activity-mark:hover{
+  color: green;
+  background-color: lightgreen;
+  border-radius: 100%;
+  opacity: .9;
 }

@@ -19,7 +19,7 @@
       <ng-template pTemplate="header">
         <button
         class="add-activity"
-        (click)="handleProductEvent(addActivityEvent)">
+        (click)="handleActivityEvent(addActivityEvent)">
           <i class="pi pi-plus"></i>
           <span>Adicionar atividade</span>
         </button>
@@ -124,8 +124,11 @@
 
       <ng-template pTemplate="body" let-activity>
         <tr
-        (click)="handleProductEvent(editActivityEvent, activity?.id)">
-          <td>{{activity?.name}}</td>
+        (click)="handleActivityEvent(editActivityEvent, activity?.id)">
+          <td class="flex align-items-center">
+            <i class="pi pi-check-circle mr-3 activity-mark"
+            (click)="handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
+            {{activity?.name}}</td>
           <td>{{activity?.idProjects?.name}}</td>
           <td>{{activity?.idResponsableUser?.name}}</td>
           <td>{{activity?.endDate}}</td>
