@@ -1,0 +1,132 @@
+<div class="grid">
+  <div class="col-12">
+    <p-card
+    styleClass="shadow-3 m-5 text-indigo-800"
+    header="Minhas atividades">
+      <p-table
+      #activitiesTable
+      [value]="activities"
+      [rows]="10"
+      [paginator]="true"
+      [responsive]="true"
+      [globalFilterFields]="['name']"
+      [tableStyle]="{'min-width': '75rem'}"
+      [(selection)]="activitySelected"
+      [rowHover]="true"
+      dataKey="id"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} atividades">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">
+              <div class="flex justify-content-between align-items-center">
+                <div class="flex justify-content-between align-items-center">
+                  Nome da tarefa
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  field="name"
+                  display="menu"
+                  matchMode="contains"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false">
+                  </p-columnFilter>
+                </div>
+              </div>
+            </th>
+            <th pSortableColumn="project">
+              <div class="flex justify-content-between align-items-center">
+                <div class="flex justify-content-between align-items-center">
+                  Projeto
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  field="project"
+                  display="menu"
+                  matchMode="contains"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false">
+                  </p-columnFilter>
+                </div>
+              </div>
+            </th>
+            <th pSortableColumn="responsableUser">
+              <div class="flex justify-content-between align-items-center">
+                <div class="flex justify-content-between align-items-center">
+                  Responsável
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  field="responsableUser"
+                  display="menu"
+                  matchMode="contains"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false">
+                  </p-columnFilter>
+                </div>
+              </div>
+            </th>
+            <th pSortableColumn="endDate">
+              <div class="flex justify-content-between align-items-center">
+                <div class="flex justify-content-between align-items-center">
+                  Data de encerramento
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  field="endDate"
+                  display="menu"
+                  matchMode="contains"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false">
+                  </p-columnFilter>
+                </div>
+              </div>
+            </th>
+            <th pSortableColumn="status">
+              <div class="flex justify-content-between align-items-center">
+                <div class="flex justify-content-between align-items-center">
+                  Status
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter
+                  type="text"
+                  field="status"
+                  display="menu"
+                  matchMode="contains"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false">
+                  </p-columnFilter>
+                </div>
+              </div>
+            </th>
+
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-activity>
+          <tr>
+            <td>{{activity?.name}}</td>
+            <td>{{activity?.idProjects?.name}}</td>
+            <td>{{activity?.idResponsableUser?.name}}</td>
+            <td>{{activity?.endDate}}</td>
+            <td>{{activity?.status}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

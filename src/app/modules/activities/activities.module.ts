@@ -18,12 +18,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ActivitiesHomeComponent } from './activities-home/activities-home.component';
 import { ConfirmationService } from 'primeng/api';
+import { ActivitiesTableComponent } from './components/activities-table/activities-table.component';
 
 
 
 @NgModule({
   declarations: [
-    ActivitiesHomeComponent
+    ActivitiesHomeComponent,
+    ActivitiesTableComponent
   ],
   imports: [
     CommonModule,
