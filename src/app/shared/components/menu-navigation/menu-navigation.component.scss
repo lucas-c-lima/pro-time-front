@@ -13,23 +13,31 @@
 
 ::ng-deep .menu-container button{
   width: 100%;
+  display: flex;
+  align-items: center;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   padding: 5px;
   text-align: left;
   border-radius: 10px;
   border: none;
   transition: .1s;
-}
-::ng-deep .menu-container button i{
-  font-size: 12px;
-  padding: 5px;
-  margin-right: 5px;
+  cursor: pointer;
 }
 
+::ng-deep .menu-container button i{
+  font-size: 16px;
+  padding: 5px;
+  margin-right: 5px;
+  opacity: .5;
+}
+
+::ng-deep .menu-container button.active{
+  background-color: #444 !important;
+}
 ::ng-deep .menu-container button:hover{
-  background-color: #444;
+  background-color: #333;
 }
 
 ::ng-deep .add-hours{
@@ -47,6 +55,12 @@
 ::ng-deep .add-hours i{
   background-color: #C3B1E1;
   border-radius: 100%;
+  opacity: 1 !important;
 }
 
+::ng-deep .separator{
+  width: 100%;
+  border: solid 1px #444;
+  margin: 10px 0;
+}
 

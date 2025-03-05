@@ -1,17 +1,32 @@
 <div class="menu-container">
-  <button
-  class="add-hours"
-  >
+  <button class="add-hours">
     <i class="pi pi-plus"></i>
     <span>Registrar Horas</span>
   </button>
-  <button>
+
+  <button
+  routerLink="/dashboard"
+  routerLinkActive="active"
+  >
     <i class="pi pi-home"></i>
     <span>Página inicial</span>
   </button>
-  <button>
+  <button
+  routerLink="/activities"
+  routerLinkActive="active"
+  >
     <i class="pi pi-check-circle"></i>
     <span>Minhas atividades</span>
+  </button>
+
+  <div class="separator"></div>
+
+  <button
+  routerLink="/projects"
+  routerLinkActive="active"
+  >
+    <i class="pi pi-folder"></i>
+    <span>Projetos</span>
   </button>
 
 </div>
