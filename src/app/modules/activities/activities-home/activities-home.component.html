@@ -6,6 +6,7 @@
     <app-activities-table
     class="content"
     [activities]="activitiesDatas"
+    (activityEvent)="handleActivityAction($event)"
     ></app-activities-table>
   </main>
 </div>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
+import { EventAction } from 'src/app/models/interface/projects/event/EventAction';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ActivitiesDataTransferService } from 'src/app/shared/services/activities/activities-data-transfer.service';
 
@@ -57,6 +58,12 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
         this.router.navigate(['/dashboard'])
       }
     })
+  }
+
+  handleActivityAction(event: EventAction): void{
+    if (event){
+      console.log('Dados', event);
+    }
   }
 
   ngOnDestroy(): void {

@@ -17,6 +17,12 @@
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} atividades">
       <ng-template pTemplate="header">
+        <button
+        class="add-activity"
+        (click)="handleProductEvent(addActivityEvent)">
+          <i class="pi pi-plus"></i>
+          <span>Adicionar atividade</span>
+        </button>
         <tr>
           <th pSortableColumn="name">
             <div class="flex justify-content-between align-items-center">
@@ -113,12 +119,12 @@
               </div>
             </div>
           </th>
-
         </tr>
       </ng-template>
 
       <ng-template pTemplate="body" let-activity>
-        <tr>
+        <tr
+        (click)="handleProductEvent(editActivityEvent, activity?.id)">
           <td>{{activity?.name}}</td>
           <td>{{activity?.idProjects?.name}}</td>
           <td>{{activity?.idResponsableUser?.name}}</td>
