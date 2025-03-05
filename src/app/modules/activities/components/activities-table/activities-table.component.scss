@@ -1,0 +1,14 @@
+::ng-deep .container-card,
+::ng-deep .card-content>div,
+::ng-deep .p-card-body{
+  height: 100%;
+}
+::ng-deep .card-content{
+  height: 100%;
+  display: block;
+}
+
+::ng-deep .card-content>div{
+  box-shadow: none;
+  border-radius: none;
+}
