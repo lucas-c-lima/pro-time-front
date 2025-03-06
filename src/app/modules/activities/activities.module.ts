@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ACTIVITIES_ROUTES } from './activities.routing';
@@ -19,13 +19,16 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ActivitiesHomeComponent } from './activities-home/activities-home.component';
 import { ConfirmationService } from 'primeng/api';
 import { ActivitiesTableComponent } from './components/activities-table/activities-table.component';
+import { ActivityFormComponent } from './components/activity-form/activity-form.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
 @NgModule({
   declarations: [
     ActivitiesHomeComponent,
-    ActivitiesTableComponent
+    ActivitiesTableComponent,
+    ActivityFormComponent
   ],
   imports: [
     CommonModule,
@@ -45,8 +48,9 @@ import { ActivitiesTableComponent } from './components/activities-table/activiti
     DynamicDialogModule,
     DropdownModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule
   ],
-  providers: [DialogService, ConfirmationService]
+  providers: [DialogService, ConfirmationService, DatePipe]
 })
 export class ActivitiesModule { }

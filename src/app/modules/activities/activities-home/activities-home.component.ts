@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
-import { EventAction } from 'src/app/models/interface/projects/event/EventAction';
+import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ActivitiesDataTransferService } from 'src/app/shared/services/activities/activities-data-transfer.service';
+import { ActivityFormComponent } from '../components/activity-form/activity-form.component';
 
 @Component({
   selector: 'app-activities-home',
@@ -14,13 +16,16 @@ import { ActivitiesDataTransferService } from 'src/app/shared/services/activitie
 })
 export class ActivitiesHomeComponent implements OnInit, OnDestroy{
   private readonly destroy$: Subject<void> = new Subject();
-  public activitiesDatas: Array<GetAllActivitiesResponse> = []
+  private ref!: DynamicDialogRef;
+  public activitiesDatas: Array<GetAllActivitiesResponse> = [];
 
   constructor(
     private activitiesService: ActivitiesService,
     private activitiesDtService: ActivitiesDataTransferService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private dialogService: DialogService
   ){}
 
   ngOnInit(): void {
@@ -62,7 +67,22 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
 
   handleActivityAction(event: EventAction): void{
     if (event){
-      console.log('Dados', event);
+      this.ref = this.dialogService.open(ActivityFormComponent,{
+        header: event?.action,
+        width: '70%',
+        contentStyle: { overflow: 'auto'},
+        baseZIndex: 10000,
+        maximizable: true,
+        data: {
+          event: event,
+          activitiesDatas: this.activitiesDatas
+        }
+      });
+      this.ref.onClose
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => this.getAPIActivitiesDatas(),
+      })
     }
   }
 

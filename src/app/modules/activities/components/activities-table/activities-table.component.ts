@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
-import { EventAction } from 'src/app/models/interface/projects/event/EventAction';
+import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 
 @Component({
