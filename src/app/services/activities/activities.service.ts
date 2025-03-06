@@ -1,9 +1,11 @@
+import { CreateActivityRequest } from './../../models/interface/activities/request/CreateActivityRequest';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environments';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
+import { CreateActivityResponse } from 'src/app/models/interface/activities/response/CreateActivityResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,13 @@ export class ActivitiesService {
   getAllActivities(): Observable<Array<GetAllActivitiesResponse>>{
     return this.http.get<Array<GetAllActivitiesResponse>>(
       `${this.API_URL}/activities`,
+      this.httpOptions
+    )
+  }
+
+  createActivity(requestDatas: CreateActivityRequest): Observable<CreateActivityResponse>{
+    return this.http.post<CreateActivityResponse>(
+      `${this.API_URL}/activities`, requestDatas,
       this.httpOptions
     )
   }
