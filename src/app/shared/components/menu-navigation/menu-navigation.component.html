@@ -1,4 +1,7 @@
 <div class="menu-container">
+  <div class="">
+
+  </div>
   <button class="add-hours">
     <i class="pi pi-plus"></i>
     <span>Registrar Horas</span>
@@ -18,8 +21,18 @@
     <i class="pi pi-check-circle"></i>
     <span>Minhas atividades</span>
   </button>
+  <button
+  routerLink="/insights"
+  routerLinkActive="active"
+  >
+    <i class="pi pi-chart-line"></i>
+    <span>Relatórios</span>
+  </button>
 
+  <!-- ADMIN -->
   <div class="separator"></div>
+
+  <h2 class="title">Administração</h2>
 
   <button
   routerLink="/projects"
@@ -33,8 +46,15 @@
   routerLink="/users"
   routerLinkActive="active"
   >
-    <i class="pi pi-folder"></i>
-    <span>Projetos</span>
+    <i class="pi pi-users"></i>
+    <span>Usuários</span>
   </button>
 
+  <button
+  routerLink="/insights"
+  routerLinkActive="active"
+  >
+    <i class="pi pi-chart-line"></i>
+    <span>Relatórios - Admin</span>
+  </button>
 </div>
