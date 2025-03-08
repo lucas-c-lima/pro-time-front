@@ -1,0 +1,6 @@
+export enum ActivityStatus {
+  ABERTA = 'ABERTA',
+  EM_ANDAMENTO = 'EM_ANDAMENTO',
+  CONCLUIDA = 'CONCLUIDA',
+  PAUSADA = 'PAUSADA'
+}

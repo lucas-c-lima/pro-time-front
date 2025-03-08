@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environments';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 import { CreateActivityResponse } from 'src/app/models/interface/activities/response/CreateActivityResponse';
+import { EditActivityRequest } from 'src/app/models/interface/activities/request/EditActivityRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,14 @@ export class ActivitiesService {
   createActivity(requestDatas: CreateActivityRequest): Observable<CreateActivityResponse>{
     return this.http.post<CreateActivityResponse>(
       `${this.API_URL}/activities`, requestDatas,
+      this.httpOptions
+    )
+  }
+
+  editActivity(requestDatas: EditActivityRequest): Observable<void>{
+    return this.http.put<void>(
+      `${this.API_URL}/activities/${requestDatas.id}`,
+      requestDatas,
       this.httpOptions
     )
   }
