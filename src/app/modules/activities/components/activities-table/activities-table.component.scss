@@ -1,56 +1,178 @@
-::ng-deep .container-card,
-::ng-deep .card-content>div,
-::ng-deep .p-card-body{
-  height: 100%;
-}
+::ng-deep {
 
-::ng-deep tr{
-  cursor: pointer;
-}
-::ng-deep .card-content{
-  height: 100%;
-  display: block;
-}
+  .container-card,
+  .card-content>div,
+  .p-card-body{
+    height: 100%;
+    background-color: #1d1d1d;
+    color: #eee;
+  }
 
-::ng-deep .card-content>div{
-  box-shadow: none;
-  border-radius: none;
-}
+  .p-card-body,
+  .p-card{
+    padding: .5rem !important;
+  }
 
-::ng-deep .p-card-content{
-  padding-top: 0.5rem !important;
-}
+  th, tr,
+  .p-paginator{
+    background-color: transparent !important;
+    color: #eee;
+  }
+  .p-paginator{
+    border: none !important;
 
-::ng-deep .add-activity{
-  display: flex;
-  align-items: center;
-  background-color: #4573d2;
-  font-size: 14px;
-  color: white;
-  padding: 5px;
-  padding-right: 10px;
-  text-align: left;
-  border-radius: 10px;
-  border: none;
-  transition: .1s;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
+  }
 
-::ng-deep .add-activity i {
-  font-size: 16px;
-  padding: 5px;
-  margin-right: 5px;
-}
+  // ICONS
+  .p-datatable .p-datatable-thead > tr > th > div> div:last-child > .p-element{
+    display: flex;
+  }
+  .p-datatable .p-sortable-column .p-sortable-column-icon,
+  .p-icon{
+    width: 12px;
+  }
+  .p-column-filter-menu-button{
+    width: 25px;
+    height: 25px;
+  }
+  .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon{
+    color: #4573d2 !important;
+  }
 
-::ng-deep .activity-mark{
-  opacity: .7;
-  cursor: pointer;
-  transition: .2s;
-}
-::ng-deep .activity-mark:hover{
-  color: green;
-  background-color: lightgreen;
-  border-radius: 100%;
-  opacity: .9;
+
+  .p-datatable .p-datatable-tbody > tr > td{
+    color: #eee;
+    border-color: #ffffff25;
+    border-width: 0 1px 1px 0;
+
+  }
+  .p-datatable .p-datatable-tbody > tr > td:last-child,
+  .p-datatable .p-datatable-thead > tr > th:last-child{
+    border-width: 0 0px 1px 0;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th{
+    color: #999;
+    transition: .5s;
+    border-color: #ffffff3a;
+    border-width: 0 1px 1px 0;
+  }
+  .p-datatable .p-datatable-thead > tr:hover > th:hover{
+    color: #eee;
+    background-color: #ffffff0f !important;
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
+    background: #292929;
+    color: #999;
+  }
+  .p-highlight{
+    color: #FFF !important;
+  }
+
+  tr{
+    cursor: pointer;
+  }
+  .card-content{
+    height: 100%;
+    display: block;
+  }
+
+  .card-content>div{
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .p-card-content{
+    padding-top: 0.5rem !important;
+  }
+
+  .header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  .header-title{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .add-activity{
+    display: flex;
+    align-items: center;
+    background-color: #4573d2;
+    font-size: 14px;
+    color: white;
+    padding: 5px;
+    padding-right: 10px;
+    text-align: left;
+    border-radius: 10px;
+    border: none;
+    transition: .1s;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  .add-activity i {
+    font-size: 16px;
+    padding: 5px;
+    margin-right: 5px;
+  }
+
+
+  .truncate,
+  .truncate-title,
+  .truncate-text
+  {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .truncate-title,
+  .truncate-text{
+    max-width: 100px !important;
+    justify-content: center;
+  }
+  .truncate-title-text{
+    max-width: 100px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .activity-mark{
+    opacity: .2;
+    cursor: pointer;
+    transition: .2s;
+  }
+  .activity-mark:hover{
+    color: green;
+    background-color: lightgreen;
+    border-radius: 100%;
+    opacity: .7;
+  }
+
+  .status{
+    text-transform: capitalize;
+    padding: 5px;
+    margin: -5px;
+    width: fit-content;
+    border-radius: 4px;
+    color: #222;
+    font-weight: 600;
+  }
+  .status-aberta{
+    background-color: #2ecfc7;
+  }
+  .status-em-andamento{
+    background-color: #fdd348;
+  }
+  .status-concluida{
+    background-color: #40ca8a;
+  }
+  .status-pausada{
+    background-color: #fa5454;
+  }
 }

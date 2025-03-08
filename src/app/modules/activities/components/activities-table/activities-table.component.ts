@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
 import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
+import { ActivitiesService } from 'src/app/services/activities/activities.service';
 
 @Component({
   selector: 'app-activities-table',
@@ -16,6 +17,50 @@ export class ActivitiesTableComponent {
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityEvent = ActivityEvent.EDIT_ACTIVITY_EVENT;
   public finishActivityEvent = ActivityEvent.FINISH_ACTIVITY_EVENT;
+  constructor(private activitiesService: ActivitiesService) {}
+
+  ngOnInit(): void {
+    this.loadActivities();
+  }
+
+  loadActivities(): void {
+    this.activitiesService.getAllActivities().subscribe((activities) => {
+      this.activities = activities;
+    });
+  }
+
+  formatDateRange(startDate: string, endDate: string): string {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const startDay = start.getDate().toString().padStart(2, '0');
+    const startMonth = start.toLocaleString('default', { month: 'short' }).replace('.', '');
+
+    const endDay = end.getDate().toString().padStart(2, '0');
+    const endMonth = end.toLocaleString('default', { month: 'short' }).replace('.', '') ;
+
+    return `${startDay}/${startMonth} - ${endDay}/${endMonth}`;
+  }
+
+  formatStatus(status: string): string{
+    return status.replace(/_/g, ' ').toLowerCase();
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'ABERTA':
+        return 'status status-aberta';
+      case 'EM_ANDAMENTO':
+        return 'status status-em-andamento';
+      case 'CONCLUIDA':
+        return 'status status-concluida';
+      case 'PAUSADA':
+        return 'status status-pausada';
+      default:
+        return 'status';
+    }
+  }
+
 
   handleActivityEvent(action: string, id?: string): void {
     if (action && action !== ''){
