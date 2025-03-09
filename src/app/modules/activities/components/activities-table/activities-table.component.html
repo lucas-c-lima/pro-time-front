@@ -127,7 +127,7 @@
         class="table-body"
         (click)="handleActivityEvent(editActivityEvent, activity?.id)">
           <td class="truncate">
-            <i class="pi pi-check-circle mr-3 activity-mark"
+            <i class="pi pi-check-circle mr-3 activity-mark" [ngClass]="getIconClass(activity?.status)"
             (click)="handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
             {{activity?.name}}</td>
           <td class="truncate-text">{{formatDateRange(activity?.startDate, activity?.endDate)}}</td>

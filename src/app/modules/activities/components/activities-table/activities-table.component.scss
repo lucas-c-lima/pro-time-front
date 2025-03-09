@@ -44,7 +44,10 @@
     color: #eee;
     border-color: #ffffff25;
     border-width: 0 1px 1px 0;
-
+    transition: .2s;
+  }
+  .p-datatable .p-datatable-tbody > tr:hover > td{
+    background-color: #ffffff0f;
   }
   .p-datatable .p-datatable-tbody > tr > td:last-child,
   .p-datatable .p-datatable-thead > tr > th:last-child{
@@ -91,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    margin-bottom: 1rem;
   }
   .header-title{
     font-size: 1.5rem;
@@ -145,12 +148,13 @@
   .activity-mark{
     opacity: .2;
     cursor: pointer;
+    border-radius: 100%;
     transition: .2s;
   }
-  .activity-mark:hover{
+  .activity-mark:hover,
+  .activity-mark-finalizada{
     color: green;
     background-color: lightgreen;
-    border-radius: 100%;
     opacity: .7;
   }
 

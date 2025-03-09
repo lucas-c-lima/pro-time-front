@@ -61,6 +61,12 @@ export class ActivitiesTableComponent {
     }
   }
 
+  getIconClass(status: string):string {
+    return status === 'CONCLUIDA' ? 'activity-mark activity-mark-finalizada' : 'activity-mark';
+  }
+
+  //AO CLICAR NO ICONE, DEIXAR A ATIVIDADE COMO CONCLUIDA
+
 
   handleActivityEvent(action: string, id?: string): void {
     if (action && action !== ''){
@@ -68,5 +74,4 @@ export class ActivitiesTableComponent {
       this.activityEvent.emit(activityEventData);
     }
   }
-
 }
