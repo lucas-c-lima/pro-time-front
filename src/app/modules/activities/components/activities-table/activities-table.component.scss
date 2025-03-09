@@ -123,6 +123,26 @@
     margin-right: 5px;
   }
 
+  .activity-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .activity-name {
+    display: flex;
+    align-items: center;
+  }
+
+  .activity-trash {
+    opacity: 0;
+    cursor: pointer;
+    transition: .2s;
+    color: #fa5454;
+  }
+  .p-datatable .p-datatable-tbody > tr:hover > td .activity-trash{
+    opacity: .5;
+  }
 
   .truncate,
   .truncate-title,

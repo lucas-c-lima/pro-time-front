@@ -7,6 +7,8 @@
     class="content"
     [activities]="activitiesDatas"
     (activityEvent)="handleActivityAction($event)"
+    (deleteActivityEvent)="handleDeleteActivityAction($event)"
     ></app-activities-table>
   </main>
 </div>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

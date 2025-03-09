@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environments';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 import { CreateActivityResponse } from 'src/app/models/interface/activities/response/CreateActivityResponse';
 import { EditActivityRequest } from 'src/app/models/interface/activities/request/EditActivityRequest';
+import { DeleteActivityResponse } from 'src/app/models/interface/activities/response/DeleteActivityResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,13 @@ export class ActivitiesService {
     return this.http.put<void>(
       `${this.API_URL}/activities/${requestDatas.id}`,
       requestDatas,
+      this.httpOptions
+    )
+  }
+
+  deleteActivity(id: number): Observable<DeleteActivityResponse>{
+    return this.http.delete<DeleteActivityResponse>(
+      `${this.API_URL}/activities/${id}`,
       this.httpOptions
     )
   }

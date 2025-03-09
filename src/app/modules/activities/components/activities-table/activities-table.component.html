@@ -127,9 +127,16 @@
         class="table-body"
         (click)="handleActivityEvent(editActivityEvent, activity?.id)">
           <td class="truncate">
-            <i class="pi pi-check-circle mr-3 activity-mark" [ngClass]="getIconClass(activity?.status)"
-            (click)="handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
-            {{activity?.name}}</td>
+            <div class="activity-container">
+              <div class="activity-name">
+                <i class="pi pi-check-circle mr-3 activity-mark" [ngClass]="getIconClass(activity?.status)"
+                (click)="handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
+                {{activity?.name}}
+              </div>
+              <i class="pi pi-trash activity-trash"
+              (click)="handleDeleteActivity(activity?.id, activity?.name); $event.stopPropagation()"></i>
+            </div>
+          </td>
           <td class="truncate-text">{{formatDateRange(activity?.startDate, activity?.endDate)}}</td>
           <td class="truncate-text">{{activity?.idProjects?.name}}</td>
           <td class="truncate-text">{{activity?.idResponsableUser?.name}}</td>
