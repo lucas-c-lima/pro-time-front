@@ -32,8 +32,19 @@ export class ActivitiesTableComponent {
   }
 
   formatDateRange(startDate: string, endDate: string): string {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+
+    const parseDate = (dateStr: string): Date => {
+      const [day, month, year] = dateStr.split(' ')[0].split('/').map(Number);
+      return new Date(year, month - 1, day);
+    }
+
+    const start = parseDate(startDate);
+    const end = parseDate(endDate);
+
+    console.log(startDate)
+    console.log(start)
+    console.log(start.getDate(), start.getMonth()+1)
+
 
     const startDay = start.getDate().toString().padStart(2, '0');
     const startMonth = start.toLocaleString('default', { month: 'short' }).replace('.', '');

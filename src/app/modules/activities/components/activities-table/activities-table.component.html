@@ -62,16 +62,16 @@
               </div>
             </div>
           </th>
-          <th pSortableColumn="project" class="truncate-title">
+          <th pSortableColumn="idProjects.name" class="truncate-title">
             <div class="flex justify-content-between align-items-center">
               <div class="flex justify-content-between align-items-center" class="truncate-title-text">
                 Projeto
               </div>
               <div class="flex justify-content-between align-items-center">
-                <p-sortIcon field="name"></p-sortIcon>
+                <p-sortIcon field="idProjects.name"></p-sortIcon>
                 <p-columnFilter
                 type="text"
-                field="project"
+                field="idProjects.name"
                 display="menu"
                 matchMode="contains"
                 [showMatchModes]="false"
@@ -81,16 +81,16 @@
               </div>
             </div>
           </th>
-          <th pSortableColumn="responsableUser" class="truncate-title">
+          <th pSortableColumn="idResponsableUser.name" class="truncate-title">
             <div class="flex justify-content-between align-items-center">
               <div class="flex justify-content-between align-items-center">
                 Responsável
               </div>
               <div class="flex justify-content-between align-items-center">
-                <p-sortIcon field="name"></p-sortIcon>
+                <p-sortIcon field="idResponsableUser.name"></p-sortIcon>
                 <p-columnFilter
                 type="text"
-                field="responsableUser"
+                field="idResponsableUser.name"
                 display="menu"
                 matchMode="contains"
                 [showMatchModes]="false"
