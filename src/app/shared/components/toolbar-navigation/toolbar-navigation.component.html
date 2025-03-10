@@ -3,18 +3,25 @@
   </div>
 
   <div class="p-toolbar-group-end">
-    <div class="user-img">
+
+    <p-speedDial
+    [model]="items"
+    showIcon="pi pi-user"
+    hideIcon="pi pi-times"
+    direction="down"></p-speedDial>
+
+    <!-- <div class="user-img" >
       <i class="pi pi-user"></i>
-    </div>
-    <!-- <p-button
-    label="Sair"
-    icon="pi pi-sign-out"
-    styleClass="p-button-danger"
-    (onClick)="handleLogout()"
-    >
-    </p-button> -->
+    </div> -->
   </div>
-
-
-
 </p-toolbar>
+
+
+
+  <!-- <p-button
+  label="Sair"
+  icon="pi pi-sign-out"
+  styleClass="p-button-danger"
+  (onClick)="handleLogout()"
+  >
+  </p-button> -->

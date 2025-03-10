@@ -8,7 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { ToolbarNavigationComponent } from './components/toolbar-navigation/toolbar-navigation.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MenuNavigationComponent } from './components/menu-navigation/menu-navigation.component';
-
+import { SpeedDialModule } from 'primeng/speeddial';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { MenuNavigationComponent } from './components/menu-navigation/menu-navig
     //PrimeNg
     ToolbarModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    SpeedDialModule
   ],
   exports:[ToolbarNavigationComponent, MenuNavigationComponent],
   providers: [DialogService, CurrencyPipe]

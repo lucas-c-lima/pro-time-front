@@ -1,11 +1,50 @@
-::ng-deep .p-toolbar{
-  margin-top: -0.6rem;
-  border-radius: 0px !important;
-  background-color: #222 !important;
-  border: none;
-  border-bottom: solid 1px #444;
-  width: 100%;
+::ng-deep{
+  .p-toolbar{
+    margin-top: -0.6rem;
+    border-radius: 0px !important;
+    background-color: #222 !important;
+    border: none;
+    border-bottom: solid 1px #444;
+    width: 100%;
+  }
+
+  .p-speeddial{
+    position: relative !important;
+  }
+  .p-speeddial > button{
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #444;
+    border-color: #999;
+  }
+  .p-speeddial > button:focus{
+    box-shadow: none !important;
+  }
+  .p-speeddial > button:enabled:hover{
+    background-color: #555;
+    border-color: #aaa;
+  }
+
+  .p-speeddial > ul{
+    position: absolute;
+    margin-top: 50px;
+  }
+  .p-speeddial > ul > li > a{
+    background-color: #444;
+    transition: .5s transform;
+  }
+  .p-speeddial > ul > li:hover > a{
+    background-color: #555;
+    transform: scale(1.05);
+  }
+  .p-speeddial > ul > li:last-child > a{
+    background-color: #fa5454;
+  }
+  .p-speeddial > ul > li:last-child > a{
+    background-color: #f54242;
+  }
 }
+
 
 .user-img{
   width: 40px;
@@ -19,8 +58,10 @@
   border: solid 1px #999;
 }
 
- i {
+i {
   margin-top: 5px;
   font-size: 30px;
   color: #999;
 }
+
+
