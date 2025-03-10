@@ -26,6 +26,7 @@ export class ToolbarNavigationComponent implements OnInit {
         },
         icon: 'pi pi-pencil',
         command: () => {
+          // TODO ALTERAR SENHA
           console.log('Alterar senha')
         }
       },
