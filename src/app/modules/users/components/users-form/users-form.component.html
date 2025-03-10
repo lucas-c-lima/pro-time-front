@@ -1,0 +1,68 @@
+<!-- FORM NOVO USUÁRIO -->
+ <div *ngIf="userAction?.event?.action === addUserAction">
+  <form
+  [formGroup]="addUserForm"
+  (ngSubmit)="handleSubmitAddUser()">
+    <div class="card flex flex-column md:flex-column gap-3">
+      <!-- Nome -->
+      <input pInputText placeholder="Nome" formControlName="name">
+      <!-- Email -->
+      <input pInputText placeholder="Email" formControlName="email">
+      <!-- Senha -->
+      <input pInputText placeholder="Senha" formControlName="password">
+      <!-- Perfil -->
+      <p-dropdown
+      styleClass="w-full"
+      [options]="profileOptions"
+      optionLabel="name"
+      optionValue="name"
+      placeholder="Selecione o perfil"
+      formControlName="profile"></p-dropdown>
+      <div class="flex flex-row justify-content-between align-items-center m-1">
+        <button
+        class="submit-user"
+        [disabled]="!addUserForm.valid"
+        type="submit">Concluir</button>
+      </div>
+    </div>
+  </form>
+ </div>
+
+
+<!-- FORM EDITAR USUÁRIO -->
+<div *ngIf="userAction?.event?.action === editUserAction">
+  <form [formGroup]="editUserForm" (ngSubmit)="handleSubmitEditUser()">
+    <div class="card flex flex-column md:flex-column gap-3">
+      <!-- Nome -->
+      <input pInputText placeholder="Nome" formControlName="name">
+      <!-- Email -->
+      <input pInputText placeholder="Email" formControlName="email">
+      <!-- TODO ADD UM VALIDADOR PARA BUSCAR A SENHA SEM CRIPTOGRAFIA ???? -->
+      <!-- Senha -->
+      <input pInputText placeholder="Senha" formControlName="password">
+      <!-- Perfil -->
+      <p-dropdown
+      styleClass="w-full"
+      [options]="profileOptions"
+      optionLabel="name"
+      optionValue="name"
+      placeholder="Selecione o perfil"
+      formControlName="profile"></p-dropdown>
+      <!-- Status -->
+      <p-dropdown
+      styleClass="w-full"
+      [options]="statusOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Selecione o perfil"
+      formControlName="deleted"></p-dropdown>
+
+      <div class="flex flex-row justify-content-between align-items-center m-1">
+        <button
+        class="submit-user"
+        [disabled]="!editUserForm.valid"
+        type="submit">Concluir</button>
+      </div>
+    </div>
+  </form>
+</div>

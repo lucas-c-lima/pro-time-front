@@ -1,10 +1,8 @@
-export interface GetAllUsersResponse{
+export interface DeleteUserResponse{
   id: number,
   name: string,
   email: string,
   password: string,
   profile: string,
-  creationDate: string,
-  lastLogin: string,
   deleted: boolean
 }

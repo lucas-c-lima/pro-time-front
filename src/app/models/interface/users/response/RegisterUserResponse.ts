@@ -1,10 +1,9 @@
-export interface GetAllUsersResponse{
+export interface RegisterUserResponse{
   id: number,
   name: string,
   email: string,
   password: string,
-  profile: string,
   creationDate: string,
   lastLogin: string,
-  deleted: boolean
+  profile: string
 }

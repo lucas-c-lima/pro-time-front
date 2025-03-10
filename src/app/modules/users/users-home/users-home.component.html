@@ -3,13 +3,15 @@
   <app-menu-navigation></app-menu-navigation>
   <main>
     <app-toolbar-navigation></app-toolbar-navigation>
-    <div class="top-message">
-      <h1>USUARIOS</h1>
-    </div>
-
+    <app-users-table
+    class="content"
+    [users]="usersDatas"
+    (userEvent)="handleUserAction($event)"
+    (deleteUserEvent)="handleDeleteUserAction($event)"
+    ></app-users-table>
   </main>
 </div>
-
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
 
 

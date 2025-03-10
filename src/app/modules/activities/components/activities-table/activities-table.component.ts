@@ -41,11 +41,6 @@ export class ActivitiesTableComponent {
     const start = parseDate(startDate);
     const end = parseDate(endDate);
 
-    console.log(startDate)
-    console.log(start)
-    console.log(start.getDate(), start.getMonth()+1)
-
-
     const startDay = start.getDate().toString().padStart(2, '0');
     const startMonth = start.toLocaleString('default', { month: 'short' }).replace('.', '');
 

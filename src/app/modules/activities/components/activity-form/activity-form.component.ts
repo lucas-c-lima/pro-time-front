@@ -15,7 +15,7 @@ import { GetAllProjectsResponse } from 'src/app/models/interface/projects/respon
 import { GetAllUsersResponse } from 'src/app/models/interface/users/response/GetAllUsersResponse';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
-import { UsersService } from 'src/app/services/users/users.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { ActivitiesDataTransferService } from 'src/app/shared/services/activities/activities-data-transfer.service';
 
 @Component({
@@ -74,7 +74,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
 
   constructor(
     private projectsService: ProjectsService,
-    private usersService: UsersService,
+    private usersService: UserService,
     private activitiesService: ActivitiesService,
     private activitiesDtService: ActivitiesDataTransferService,
     private formBuilder: FormBuilder,
@@ -197,10 +197,9 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           this.messageService.add({
             severity: 'error',
             summary: 'Erro',
-            detail: 'Erro ao editar produto',
+            detail: 'Erro ao editar atividade',
             life: 2500
           })
-          this.editActivityForm.reset();
         }
       })
     }

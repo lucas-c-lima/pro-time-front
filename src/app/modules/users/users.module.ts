@@ -19,12 +19,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { USERS_ROUTES } from './users.routing';
 import { ConfirmationService } from 'primeng/api';
+import { UsersTableComponent } from './components/users-table/users-table.component';
+import { UsersFormComponent } from './components/users-form/users-form.component';
 
 
 
 @NgModule({
   declarations: [
-    UsersHomeComponent
+    UsersHomeComponent,
+    UsersTableComponent,
+    UsersFormComponent
   ],
   imports: [
     CommonModule,

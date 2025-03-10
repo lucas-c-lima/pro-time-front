@@ -1,0 +1,145 @@
+<div class="container-card">
+  <p-card class="card-content">
+    <div class="header-container">
+      <span class="header-title">Usuários</span>
+      <button class="add-user"
+      (click)="handleUserEvent(addUserEvent)">
+        <i class="pi pi-plus"></i>
+        <span>Adicionar Usuário</span>
+      </button>
+    </div>
+    <p-table
+    #usersTable
+    [value]="users"
+    [rows]="10"
+    [paginator]="true"
+    [responsive]="true"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{'min-width': '74rem'}"
+    [(selection)]="userSelected"
+    [rowHover]="true"
+    dataKey="id"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} usuários"
+    [sortField]="'deleted'"
+    [sortOrder]="1">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Nome do Colaborador
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"></p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="email">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Email
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="email"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="email"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"></p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="lastLogin">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Último Login
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="lastLogin"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="lastLogin"
+              display="menu"
+              [showMenu]="false"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"></p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="profile">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Perfil
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="profile"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="profile"
+              display="menu"
+              [showMenu]="false"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"></p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="deleted">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Status
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="deleted"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="deleted"
+              display="menu"
+              [showMenu]="false"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"></p-columnFilter>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr
+      class="table-body"
+      (click)="handleUserEvent(editUserEvent, user?.id)">
+        <td class="truncate">
+          <div class="user-container">
+            <div class="user-name">
+              {{user?.name}}
+            </div>
+            <i class="pi pi-trash user-trash"
+            (click)="handleDeleteUser(user?.id, user?.name); $event.stopPropagation()"></i>
+          </div>
+        </td>
+        <td class="truncate">{{user?.email}}</td>
+        <td class="truncate">{{user?.lastLogin}}</td>
+        <td class="truncate"
+        [ngClass]="getProfileClass(user?.profile)"
+        >{{formatProfile(user?.profile)}}</td>
+        <td class="truncate">{{user?.deleted}}</td>
+      </tr>
+    </ng-template>
+
+    </p-table>
+  </p-card>
+</div>

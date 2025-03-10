@@ -72,7 +72,6 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
         width: '70%',
         contentStyle: { overflow: 'auto'},
         baseZIndex: 10000,
-        maximizable: true,
         data: {
           event: event,
           activitiesDatas: this.activitiesDatas
@@ -90,6 +89,7 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
     id: number,
     name: string
   }): void {
+    console.log(event)
     if(event){
       this.confirmationService.confirm({
         message: `Deseja realmente deletar a atividade: ${event?.name}?`,
