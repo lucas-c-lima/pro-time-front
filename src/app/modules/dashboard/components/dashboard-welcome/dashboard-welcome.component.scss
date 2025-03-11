@@ -1,0 +1,79 @@
+::ng-deep{
+  .card-content > div{
+    // background-color: rebeccapurple !important;
+  }
+  .welcome-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  .name-container{
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .basic-info-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  .basic-info-container > .container{
+    background-color: #444444;
+    display: flex;
+    gap: 25px;
+    padding: 0 20px;
+    border-radius: 25px;
+  }
+  .separator-v{
+    width: 1px;
+    height: 50%;
+    background-color: #777;
+    margin-left: 2px;
+  }
+  .basic-info-container i {
+    margin-right: 10px;
+  }
+  .period-filter,
+  .hours-counter,
+  .completed-counter{
+    display: flex;
+    align-items: center;
+  }
+
+  .teste > .p-dropdown,
+  .teste .p-inputtext{
+    background-color: transparent !important;
+    color: white !important;
+    border: none;
+  }
+  .teste .p-dropdown:not(.p-disabled).p-focus{
+    box-shadow: none;
+  }
+
+  .main-info-container{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .dash-activity-container,
+  .dash-projects-container{
+    width: 35%;
+    min-height: 22.5rem;
+    background-color: #2a2a2a;
+    border: solid 1px #444;
+    border-radius: 15px;
+  }
+  .main-info-header{
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .main-info-header i{
+    margin-right: 5px;
+  }
+}

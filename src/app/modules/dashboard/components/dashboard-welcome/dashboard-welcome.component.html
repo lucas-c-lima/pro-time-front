@@ -1,0 +1,46 @@
+<div class="container-card ">
+  <p-card class="card-content welcome-card">
+    <div class="header-container">
+      <div class="header-title">Página inicial</div>
+    </div>
+    <div class="welcome-container">
+      <div class="date-container">
+        <span>{{currentDate}}</span>
+      </div>
+      <div class="name-container">
+        <span>Bom dia, <span>{{username}}</span></span>
+      </div>
+    </div>
+    <div class="basic-info-container">
+      <div class="container">
+        <div class="period-filter">
+          <p-dropdown
+          class="teste"
+          [options]="periodSelect"
+          (onChange)="onPeriodChange($event)"></p-dropdown>
+          <div class="separator-v"></div>
+        </div>
+        <div class="hours-counter">
+          <i class="pi pi-clock"></i>
+          {{hoursCount}} Horas registradas
+        </div>
+        <div class="completed-counter">
+          <i class="pi pi-check"></i>
+          {{hoursCount}} Tarefas finalizadas
+        </div>
+      </div>
+    </div>
+    <div class="main-info-container">
+      <div class="dash-activity-container">
+        <div class="main-info-header">
+          <i class="pi pi-check-circle"></i>
+          Minhas atividades</div>
+        </div>
+        <div class="dash-projects-container">
+        <div class="main-info-header">
+          <i class="pi pi-folder"></i>
+          Projetos</div>
+      </div>
+    </div>
+  </p-card>
+</div>

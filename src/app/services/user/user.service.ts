@@ -53,6 +53,13 @@ export class UserService {
     )
   }
 
+  getUserById(userId: string): Observable<GetAllUsersResponse>{
+    return this.http.get<GetAllUsersResponse>(
+      `${this.API_URL}/users/${userId}`,
+      this.httpOptions
+    )
+  }
+
   registerUser(requestDatas: RegisterUserRequest): Observable<RegisterUserResponse>{
     return this.http.post<RegisterUserResponse>(
       `${this.API_URL}/auth/register`, requestDatas,

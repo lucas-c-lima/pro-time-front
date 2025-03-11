@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
+import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { RouterModule } from '@angular/router';
 import { DASHBOARD_ROUTES } from './dashboard.routing';
 import { SidebarModule } from 'primeng/sidebar';
@@ -12,12 +12,15 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DashboardWelcomeComponent } from './components/dashboard-welcome/dashboard-welcome.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
 @NgModule({
   declarations: [
-    DashboardHomeComponent
+    DashboardHomeComponent,
+    DashboardWelcomeComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ToolbarModule,
     CardModule,
     ToastModule,
+    DropdownModule,
     //Shared
     SharedModule
   ],

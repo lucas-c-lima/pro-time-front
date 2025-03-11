@@ -1,17 +1,6 @@
 ::ng-deep {
 
-  .container-card,
-  .card-content>div,
-  .p-card-body{
-    height: 100%;
-    background-color: #1d1d1d;
-    color: #eee;
-  }
 
-  .p-card-body,
-  .p-card{
-    padding: .5rem !important;
-  }
 
   th, tr,
   .p-paginator{
@@ -75,30 +64,6 @@
 
   tr{
     cursor: pointer;
-  }
-  .card-content{
-    height: 100%;
-    display: block;
-  }
-
-  .card-content>div{
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .p-card-content{
-    padding-top: 0.5rem !important;
-  }
-
-  .header-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  .header-title{
-    font-size: 1.5rem;
-    font-weight: bold;
   }
 
   .add-activity{

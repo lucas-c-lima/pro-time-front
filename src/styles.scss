@@ -4,9 +4,7 @@
   src: url(./assets/fonts/Nunito-VariableFont_wght.ttf);
 }
 
-html{
-  background-color: #1d1d1d;
-}
+
 
 * {
   html,
@@ -182,3 +180,58 @@ html{
     width: 50%;
   }
 }
+
+/* ------------------------------------------------------------------------  *
+*  -                            ESTILOS GERAIS                            -  *
+*  ------------------------------------------------------------------------  */
+
+body, html
+{
+  background-color: #1d1d1d;
+  margin: 0;
+  height: 100%;
+}
+.flex{
+  height: 100%;
+}
+
+.container-card,
+.card-content>div,
+.p-card-body{
+  height: 100%;
+  // background-color: #1d1d1d;
+  background-color: transparent;
+  color: #eee;
+}
+
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.header-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-content{
+  height: 100%;
+  display: block;
+}
+
+.card-content>div{
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.p-card-body,
+.p-card{
+  padding: .5rem !important;
+}
+
+.p-card-content{
+  padding-top: 0.5rem !important;
+}
+
+
