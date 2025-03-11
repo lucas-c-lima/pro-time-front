@@ -129,8 +129,11 @@
           <td class="truncate">
             <div class="activity-container">
               <div class="activity-name">
-                <i class="pi pi-check-circle mr-3 activity-mark" [ngClass]="getIconClass(activity?.status)"
-                (click)="handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
+                <button class="activity-mark-container" pTooltip="Registrar horas" tooltipPosition="top">
+                  <i class="pi pi-plus-circle activity-mark"
+                  [ngClass]="getIconClass(activity?.status)"
+                  (click)="activity?.status !== 'CONCLUIDA' && handleActivityEvent(finishActivityEvent,activity?.id); $event.stopPropagation()"></i>
+                </button>
                 {{activity?.name}}
               </div>
               <i class="pi pi-trash activity-trash"

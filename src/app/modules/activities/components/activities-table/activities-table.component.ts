@@ -70,7 +70,7 @@ export class ActivitiesTableComponent {
   }
 
   getIconClass(status: string):string {
-    return status === 'CONCLUIDA' ? 'activity-mark activity-mark-finalizada' : 'activity-mark';
+    return status === 'CONCLUIDA' ? 'activity-mark activity-disabled' : 'activity-mark';
   }
 
   //AO CLICAR NO ICONE, DEIXAR A ATIVIDADE COMO CONCLUIDA
