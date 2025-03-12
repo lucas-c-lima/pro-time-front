@@ -10,11 +10,10 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { MenuNavigationComponent } from './components/menu-navigation/menu-navigation.component';
 import { SpeedDialModule } from 'primeng/speeddial';
 
-
 @NgModule({
   declarations: [
     ToolbarNavigationComponent,
-    MenuNavigationComponent
+    MenuNavigationComponent,
   ],
   imports: [
     CommonModule,

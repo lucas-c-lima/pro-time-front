@@ -23,7 +23,6 @@ import { ActivityFormComponent } from './components/activity-form/activity-form.
 import { CalendarModule } from 'primeng/calendar';
 
 
-
 @NgModule({
   declarations: [
     ActivitiesHomeComponent,

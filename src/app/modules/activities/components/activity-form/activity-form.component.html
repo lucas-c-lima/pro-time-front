@@ -120,3 +120,52 @@
 
 
 </div>
+
+<!-- FORMULÁRIO REGISTRAR HORAS -->
+<div *ngIf="activityAction?.event?.action === hoursActivityAction">
+  <div>Atividade: {{this.activitySelectedDatas.name}}</div>
+  <div>Responsável: {{this.activitySelectedDatas.idResponsableUser.name}}</div>
+  <div>Projeto: {{this.activitySelectedDatas.idProjects.name}}</div>
+  <div>Período: {{formatDateEntry(this.activitySelectedDatas.startDate, this.activitySelectedDatas.endDate)}}</div>
+  <div>Status: {{this.activitySelectedDatas.status}}</div>
+
+  <form
+  [formGroup]="hoursActivityForm"
+  (ngSubmit)="handleSubmitHoursActivity()">
+    Dia inicio
+    <p-calendar
+        placeholder="Dia"
+        dateFormat="dd/mm/yy"
+        formControlName="startDay"
+        appendTo="body"></p-calendar>
+    Hora inicio
+    <input type="time" formControlName='startHour'>
+    <br>
+    Dia fim
+    <p-calendar
+        placeholder="Dia"
+        dateFormat="dd/mm/yy"
+        formControlName="endDay"
+        appendTo="body"></p-calendar>
+    Hora fim
+    <input
+    type="time"
+    formControlName='endHour'>
+    <br>
+    Descrição
+    <input type="text" formControlName="description">
+
+    <div class="flex flex-row justify-content-between align-items-center m-1">
+      <button
+      class="submit-activity"
+      [disabled]="!hoursActivityForm.valid"
+      type="submit"
+      >Enviar</button>
+    </div>
+  </form>
+
+  <div>
+    Ultimos lançamentos:
+
+  </div>
+</div>

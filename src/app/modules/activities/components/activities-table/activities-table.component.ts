@@ -18,7 +18,7 @@ export class ActivitiesTableComponent {
   public activitySelected!: GetAllActivitiesResponse;
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityEvent = ActivityEvent.EDIT_ACTIVITY_EVENT;
-  public finishActivityEvent = ActivityEvent.FINISH_ACTIVITY_EVENT;
+  public hoursActivityAction = ActivityEvent.HOURS_ACTIVITY_EVENT;
   constructor(private activitiesService: ActivitiesService) {}
 
   ngOnInit(): void {

@@ -57,7 +57,7 @@ export class UsersHomeComponent implements OnInit, OnDestroy{
         this.messageService.add({
           severity:'Error',
           summary: 'Erro',
-          detail: 'Erro ao acessar a Usuarios',
+          detail: 'Erro ao acessar tela Usuarios',
           life: 2500,
         })
         this.router.navigate(['/dashboard'])

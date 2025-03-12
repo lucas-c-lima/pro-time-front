@@ -11,9 +11,11 @@ import { EventAction } from 'src/app/models/interface/activities/event/EventActi
 import { CreateActivityRequest } from 'src/app/models/interface/activities/request/CreateActivityRequest';
 import { EditActivityRequest } from 'src/app/models/interface/activities/request/EditActivityRequest';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
+import { CreateEntryRequest } from 'src/app/models/interface/hours/request/CreateEntryRequest';
 import { GetAllProjectsResponse } from 'src/app/models/interface/projects/response/GetAllProjectsResponse';
 import { GetAllUsersResponse } from 'src/app/models/interface/users/response/GetAllUsersResponse';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
+import { HoursService } from 'src/app/services/hours/hours.service';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActivitiesDataTransferService } from 'src/app/shared/services/activities/activities-data-transfer.service';
@@ -67,14 +69,25 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     project: ['', Validators.required]
   })
 
+  public hoursActivityForm = this.formBuilder.group({
+    activity: [0],
+    responsableUser: [0, Validators.required],
+    description: ['', Validators.required],
+    startDay: ['', Validators.required],
+    startHour: ['', Validators.required],
+    endDay: ['', Validators.required],
+    endHour: ['', Validators.required]
+  })
+
 
   public addActivityAction = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityAction = ActivityEvent.EDIT_ACTIVITY_EVENT;
-  public finishActivityAction = ActivityEvent.FINISH_ACTIVITY_EVENT;
+  public hoursActivityAction = ActivityEvent.HOURS_ACTIVITY_EVENT;
 
   constructor(
     private projectsService: ProjectsService,
     private usersService: UserService,
+    private hoursService: HoursService,
     private activitiesService: ActivitiesService,
     private activitiesDtService: ActivitiesDataTransferService,
     private formBuilder: FormBuilder,
@@ -92,10 +105,14 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
       this.activityAction?.activitiesDatas
     ){
       this.getActivitySelectedDatas(Number(this.activityAction?.event?.id) as number);
-
+    } else if(
+      this.activityAction?.event?.action === this.hoursActivityAction &&
+      this.activityAction?.activitiesDatas
+    ){
+      this.getActivitySelectedDatas(Number(this.activityAction?.event?.id) as number);
     }
 
-    this.activityAction?.event?.action === this.finishActivityAction && this.getActivityDatas();
+    // this.activityAction?.event?.action === this.hoursActivityAction && this.getActivityDatas();
 
     this.getAllProjects();
     this.getAllUsers();
@@ -174,7 +191,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         name: this.editActivityForm.value.name as string,
         description: this.editActivityForm.value.description as string,
         startDate: this.editActivityForm.value.startDate as string,
-        endDate: this.editActivityForm.value.startDate as string,
+        endDate: this.editActivityForm.value.endDate as string,
         status: this.editActivityForm.value.status as string,
         idProjects: Number(this.editActivityForm.value.project),
         idResponsableUser: Number(this.editActivityForm.value.responsableUser)
@@ -205,6 +222,56 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     }
   }
 
+  handleSubmitHoursActivity(): void{
+    if(this.hoursActivityForm.value &&
+      this.hoursActivityForm.valid &&
+      this.activityAction.event.id){
+
+        let formattedDateStart = ''
+        const startDay = this.hoursActivityForm.value.startDay
+        const startHour = this.hoursActivityForm.value.startHour
+        let formattedDateEnd = ''
+        const endDay = this.hoursActivityForm.value.endDay
+        const endHour = this.hoursActivityForm.value.endHour
+        if(startDay && startHour && endDay && endHour){
+          formattedDateStart = this.formatDateTime(new Date(startDay), startHour)
+          formattedDateEnd = this.formatDateTime(new Date(endDay), endHour)
+
+          const requestEntryHours: CreateEntryRequest = {
+            idActivities: Number(this.hoursActivityForm.value.activity),
+            idUser: Number(this.hoursActivityForm.value.responsableUser),
+            description: this.hoursActivityForm.value.description || '',
+            startDate: formattedDateStart,
+            endDate: formattedDateEnd
+          }
+
+          console.log(requestEntryHours)
+          this.hoursService.registerHour(requestEntryHours)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: () => {
+              console.log(requestEntryHours)
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Lançamento de horas registradas com sucesso',
+                life: 2500
+              })
+              this.hoursActivityForm.reset();
+            }, error: (err) => {
+              console.log(err);
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: 'Erro ao registrar horas',
+                life: 2500
+              })
+            }
+          })
+        }
+      }
+  }
+
   getActivitySelectedDatas(activityId: number): void{
     const allActivities = this.activityAction?.activitiesDatas;
 
@@ -212,7 +279,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
       const activityFilter = allActivities.filter(
         (element) => element?.id === activityId
       );
-      if(activityFilter){
+      if(activityFilter && this.activityAction?.event?.action === this.editActivityAction){
         this.activitySelectedDatas = activityFilter[0];
         this.editActivityForm.setValue({
           name: this.activitySelectedDatas?.name,
@@ -222,6 +289,18 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           status: this.activitySelectedDatas?.status,
           responsableUser: String(this.activitySelectedDatas?.idResponsableUser.id),
           project: String(this.activitySelectedDatas?.idProjects.id)
+        })
+      }
+      else if (activityFilter && this.activityAction?.event?.action === this.hoursActivityAction){
+        this.activitySelectedDatas = activityFilter[0];
+        this.hoursActivityForm.setValue({
+          activity: this.activitySelectedDatas?.id,
+          responsableUser: this.activitySelectedDatas?.idResponsableUser.id,
+          description: '',
+          startDay: '',
+          startHour: '',
+          endDay: '',
+          endHour: ''
         })
       }
     }
@@ -243,6 +322,32 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
   private formatDate(date: any): string {
     const formattedDate = new Date(date);
     return this.datePipe.transform(formattedDate, "dd/MM/yyyy HH:mm:ss") || '';
+  }
+
+  formatDateEntry(startDate: string, endDate: string): string{
+    const parseDate = (dateStr: string): Date => {
+      const [day, month, year] = dateStr.split(' ')[0].split('/').map(Number);
+      return new Date(year, month - 1, day);
+    }
+
+    const start = parseDate(startDate);
+    const end = parseDate(endDate);
+
+    const startDay = start.getDate().toString().padStart(2, '0');
+    const startMonth = start.toLocaleString('default', { month: 'short' }).replace('.', '');
+
+    const endDay = end.getDate().toString().padStart(2, '0');
+    const endMonth = end.toLocaleString('default', { month: 'short' }).replace('.', '') ;
+
+    return `${startDay}/${startMonth} - ${endDay}/${endMonth}`;
+
+  }
+
+  private formatDateTime(date: Date, time: string): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year} ${time}:00`;
   }
 
   ngOnDestroy(): void {
