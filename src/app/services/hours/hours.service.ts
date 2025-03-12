@@ -31,6 +31,13 @@ export class HoursService {
     )
   }
 
+  getHoursByActivity(activityId: string): Observable<Array<GetAllEntriesResponse>>{
+    return this.http.get<Array<GetAllEntriesResponse>>(
+      `${this.API_URL}/entries/activities/${activityId}`,
+      this.httpOptions
+    )
+  }
+
   registerHour(requestDatas: CreateEntryRequest): Observable<CreateEntryRequest>{
     console.log(requestDatas)
     return this.http.post<CreateEntryRequest>(

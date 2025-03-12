@@ -1,6 +1,6 @@
 export interface GetAllEntriesResponse{
   id: number,
-  idActivities: {
+  idActivity: {
     id: number;
     idProjects: {
       id: number;

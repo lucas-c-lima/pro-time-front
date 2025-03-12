@@ -1,6 +1,6 @@
 export interface CreateEntryResponse{
   id: number,
-  idActivities: number,
+  idActivity: number,
   idUsers: number,
   descrition: string,
   startDate: string,

@@ -12,6 +12,7 @@ import { CreateActivityRequest } from 'src/app/models/interface/activities/reque
 import { EditActivityRequest } from 'src/app/models/interface/activities/request/EditActivityRequest';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 import { CreateEntryRequest } from 'src/app/models/interface/hours/request/CreateEntryRequest';
+import { GetAllEntriesResponse } from 'src/app/models/interface/hours/response/GetAllEntriesResponse';
 import { GetAllProjectsResponse } from 'src/app/models/interface/projects/response/GetAllProjectsResponse';
 import { GetAllUsersResponse } from 'src/app/models/interface/users/response/GetAllUsersResponse';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
@@ -33,6 +34,9 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
 
   public usersDatas: Array<GetAllUsersResponse> = [];
   public selectedUsers: Array<{name: string; code: string}> = [];
+
+  hoursEntries: any[] = []
+  public hoursDatas: Array<GetAllEntriesResponse> = [];
 
   public minDate: Date = new Date()
   public statusOptions = Object.keys(ActivityStatus).map(key => ({
@@ -111,8 +115,6 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     ){
       this.getActivitySelectedDatas(Number(this.activityAction?.event?.id) as number);
     }
-
-    // this.activityAction?.event?.action === this.hoursActivityAction && this.getActivityDatas();
 
     this.getAllProjects();
     this.getAllUsers();
@@ -238,25 +240,25 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           formattedDateEnd = this.formatDateTime(new Date(endDay), endHour)
 
           const requestEntryHours: CreateEntryRequest = {
-            idActivities: Number(this.hoursActivityForm.value.activity),
+            idActivity: Number(this.hoursActivityForm.value.activity),
             idUser: Number(this.hoursActivityForm.value.responsableUser),
             description: this.hoursActivityForm.value.description || '',
             startDate: formattedDateStart,
             endDate: formattedDateEnd
           }
 
-          console.log(requestEntryHours)
-          this.hoursService.registerHour(requestEntryHours)
+          this.hoursService
+          .registerHour(requestEntryHours)
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: () => {
-              console.log(requestEntryHours)
               this.messageService.add({
                 severity: 'success',
                 summary: 'Sucesso',
                 detail: 'Lançamento de horas registradas com sucesso',
                 life: 2500
               })
+              this.hoursEntries.push(requestEntryHours);
               this.hoursActivityForm.reset();
             }, error: (err) => {
               console.log(err);
@@ -302,6 +304,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           endDay: '',
           endHour: ''
         })
+        this.getActivityHours(this.activitySelectedDatas?.id)
       }
     }
   }
@@ -315,6 +318,27 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           this.activitiesDatas = response;
           this.activitiesDatas && this.activitiesDtService.setActivitiesDatas(this.activitiesDatas);
         }
+      }
+    })
+  }
+
+  getActivityHours(activityId: number):void {
+    this.hoursService.getHoursByActivity(String(activityId))
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: (response) => {
+        if(response.length > 0){
+          this.hoursDatas = response
+        }
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Erro ao carregar horas anteriores',
+          life: 2500
+        });
       }
     })
   }
@@ -341,6 +365,14 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
 
     return `${startDay}/${startMonth} - ${endDay}/${endMonth}`;
 
+  }
+
+  calculateHours(startDate: string, endDate: string): string{
+    const start = new Date(startDate)
+    const end = new Date(endDate)
+    const diffMs = end.getTime() - start.getTime();
+    const diffHours = diffMs / (1000*60*60);
+    return diffHours.toFixed(2)
   }
 
   private formatDateTime(date: Date, time: string): string {

@@ -1,5 +1,5 @@
 export interface CreateEntryRequest{
-  idActivities: number,
+  idActivity: number,
   idUser: number,
   description: string,
   startDate: string,

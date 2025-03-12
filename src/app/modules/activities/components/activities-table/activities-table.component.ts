@@ -3,6 +3,7 @@ import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
 import { DeleteActivityAction } from 'src/app/models/interface/activities/event/DeleteActivityAction';
 import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
+import { GetAllEntriesResponse } from 'src/app/models/interface/hours/response/GetAllEntriesResponse';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 
 @Component({
