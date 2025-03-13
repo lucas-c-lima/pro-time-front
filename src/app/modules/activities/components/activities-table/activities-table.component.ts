@@ -74,9 +74,6 @@ export class ActivitiesTableComponent {
     return status === 'CONCLUIDA' ? 'activity-mark activity-disabled' : 'activity-mark';
   }
 
-  //AO CLICAR NO ICONE, DEIXAR A ATIVIDADE COMO CONCLUIDA
-
-
   handleActivityEvent(action: string, id?: string): void {
     if (action && action !== ''){
       const activityEventData = id && id !== '' ? {action, id} : {action}

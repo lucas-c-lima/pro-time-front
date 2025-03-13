@@ -136,21 +136,13 @@
     <p-calendar
         placeholder="Dia"
         dateFormat="dd/mm/yy"
-        formControlName="startDay"
+        formControlName="entryDay"
         appendTo="body"></p-calendar>
     Hora inicio
     <input type="time" formControlName='startHour'>
     <br>
-    Dia fim
-    <p-calendar
-        placeholder="Dia"
-        dateFormat="dd/mm/yy"
-        formControlName="endDay"
-        appendTo="body"></p-calendar>
     Hora fim
-    <input
-    type="time"
-    formControlName='endHour'>
+    <input type="time" formControlName='endHour'>
     <br>
     Descrição
     <input type="text" formControlName="description">
@@ -177,15 +169,49 @@
           <th>Horas registradas</th>
           <th>Período registrado</th>
           <th>Data de Registro</th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-entry >
-        <tr>
+        <tr *ngIf="editingEntry?.id !== entry.id">
           <td>{{entry.idUsers.name}}</td>
           <td>{{entry.description}}</td>
-          <td>{{calculateHours(entry.startDate, entry.endDate)}} horas</td>
-          <td>{{entry.startDate}}</td>
-          <td>{{entry.startDate}}</td>
+          <td>{{calculateHours(entry.startDate, entry.endDate)}} Hora(s)</td>
+          <td>{{formatDateTimeRangeHours(entry.startDate, entry.endDate)}}</td>
+          <td>{{entry.registerDate}}</td>
+          <td>
+            <button pTooltip="Editar registro" tooltipPosition="top" (click)="startEditing(entry)">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button pTooltip="Deletar registro" tooltipPosition="top">
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="editingEntry?.id === entry.id">
+          <td>{{entry.idUsers.name}}</td>
+          <td><input type="text" [(ngModel)]="editingEntry.description"></td>
+          <td>- Hora(s)</td>
+          <td>
+            <p-calendar
+              placeholder="Dia"
+              dateFormat="dd/mm/yy"
+              [(ngModel)]="editingEntry.startDate"
+              appendTo="body"></p-calendar>
+              -
+            <input type="time" [(ngModel)]="editingEntry.startHour">
+            às
+            <input type="time" [(ngModel)]="editingEntry.endHour">
+          </td>
+          <td>{{editingEntry.registerDate}}</td>
+          <td>
+            <button pTooltip="Confirmar" tooltipPosition="top" (click)="handleSubmitEditHours()">
+              <i class="pi pi-check"></i>
+            </button>
+            <button pTooltip="Cancelar" tooltipPosition="top" (click)="cancelEditing()">
+              <i class="pi pi-times"></i>
+            </button>
+          </td>
         </tr>
       </ng-template>
     </p-table>

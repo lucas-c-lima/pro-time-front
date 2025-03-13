@@ -35,4 +35,10 @@
     transition: .1s;
     cursor: pointer;
   }
+
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content{
+    background-color: #222;
+    color: white;
+  }
 }
