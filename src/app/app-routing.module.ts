@@ -22,8 +22,10 @@ const routes: Routes = [
   ),
   canActivate: [AuthGuard]
 },
+
+//-------------- ADMIN
 {
-  path: 'activities',
+  path: 'admin/activities',
   loadChildren: () =>
     import('./modules/activities/activities.module').then(
       (m) => m.ActivitiesModule
@@ -31,19 +33,19 @@ const routes: Routes = [
   canActivate: [AuthGuard]
 },
 {
-  path: 'projects',
+  path: 'admin/users',
+  loadChildren: () => import('./modules/users/users.module').then(
+    (m) => m.UsersModule
+  ),
+  canActivate: [AuthGuard],
+},
+{
+  path: 'admin/projects',
   loadChildren: () => import('./modules/projects/projects.module').then(
     (m) => m.ProjectsModule
   ),
   canActivate: [AuthGuard],
 },
-{
-  path: 'users',
-  loadChildren: () => import('./modules/users/users.module').then(
-    (m) => m.UsersModule
-  ),
-  canActivate: [AuthGuard],
-}
 
 ];
 
