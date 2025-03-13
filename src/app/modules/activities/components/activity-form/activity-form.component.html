@@ -183,7 +183,7 @@
             <button pTooltip="Editar registro" tooltipPosition="top" (click)="startEditing(entry)">
               <i class="pi pi-pencil"></i>
             </button>
-            <button pTooltip="Deletar registro" tooltipPosition="top">
+            <button pTooltip="Deletar registro" tooltipPosition="top" (click)="handleDeleteHour(entry.id)">
               <i class="pi pi-trash"></i>
             </button>
           </td>

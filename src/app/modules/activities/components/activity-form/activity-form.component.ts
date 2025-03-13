@@ -384,6 +384,32 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     }
   }
 
+  handleDeleteHour(id: number): void{
+    this.hoursService
+    .deleteHour(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Registro de horas deletado com sucesso',
+          life: 2500
+        });
+        this.getActivityHours(this.activitySelectedDatas.id);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Erro ao deletar registro de horas',
+          life: 2500
+        });
+      }
+    });
+  }
+
   // --- FORMATS ------------
   private formatDate(date: any): string {
     const formattedDate = new Date(date);
