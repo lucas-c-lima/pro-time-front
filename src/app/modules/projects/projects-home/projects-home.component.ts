@@ -137,6 +137,7 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
       accept: () => {
         this.deleteProject(event.id);
         this.backToProjects()
+        this.getServiceProjectsDatas()
       }
     })
   }
@@ -174,6 +175,7 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
 
   backToProjects(): void {
     this.selectedProject = null;
+    this.getAPIProjectsDatas()
   }
 
   ngOnDestroy(): void {

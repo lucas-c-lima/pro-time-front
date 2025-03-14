@@ -20,7 +20,15 @@
   </main>
 </div>
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-toast
+  position="top-right"
+  [showTransformOptions]="'translateX(100%)'"
+  [showTransitionOptions]="'500ms ease-out'"
+  [hideTransitionOptions]="'500ms ease-out'"
+  [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"
+>
 
+</p-toast>
 
 
 

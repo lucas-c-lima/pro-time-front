@@ -262,7 +262,6 @@ export class ProjectFormComponent {
                 life: 2500
               })
             }
-            // REFRESH TABLE ON CLOSE
           }, error: (err) => {
             console.log(err);
             this.messageService.add({
@@ -452,6 +451,7 @@ export class ProjectFormComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
+            console.log(response)
             if (response) {
               this.messageService.add({
                 severity: 'success',

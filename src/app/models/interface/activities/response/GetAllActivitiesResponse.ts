@@ -34,6 +34,5 @@ export interface GetAllActivitiesResponse{
     lastLogin: string;
   },
   creationDate: string;
-  modificationDate: string;
   deleted: string
 }
