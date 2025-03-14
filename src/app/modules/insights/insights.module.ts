@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { InsightHomeComponent } from './insight-home/insight-home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -18,6 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { ChartModule } from 'primeng/chart'
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -34,6 +36,7 @@ import { TooltipModule } from 'primeng/tooltip';
     SharedModule,
     HttpClientModule,
     // PrimeNg
+    ChartModule,
     CardModule,
     ButtonModule,
     TableModule,
@@ -43,9 +46,11 @@ import { TooltipModule } from 'primeng/tooltip';
     InputTextareaModule,
     DynamicDialogModule,
     DropdownModule,
+    FormsModule,
     ConfirmDialogModule,
     TooltipModule,
-    CalendarModule
-]
+    CalendarModule,
+],
+providers: [DatePipe]
 })
 export class InsightsModule { }

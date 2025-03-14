@@ -3,7 +3,52 @@
     <div class="header-container">
       <span class="header-title">Relatórios</span>
     </div>
-    <div class="filters-container"></div>
-    <div class="minimal-cards-container"></div>
+    <div class="filters-container">
+      <p-dropdown
+      [options]="timePeriod"
+      [(ngModel)]="selectedFilter"
+      (onChange)="onFilterChange()"
+      ></p-dropdown>
+    </div>
+    <div class="minimal-info-cards-container">
+      <div class="minimal-info-card">
+        <span>Tarefas Concluidas</span><br>
+        <span>{{ finishedActivities }}</span>
+      </div>
+      <div class="minimal-info-card">
+        <span>Tarefas em Andamento</span><br>
+        <span>{{ onGoingActivities }}</span>
+      </div>
+      <div class="minimal-info-card">
+        <span>Tarefas atrasadas</span><br>
+        <span>{{ lateActivities }}</span>
+      </div>
+      <div class="minimal-info-card">
+        <span>Tarefas atrasadas</span><br>
+        <span>{{ filteredNumber }}</span>
+      </div>
+    </div>
+    <div>
+      <p-chart
+        type="bar"
+        [data]="activitiesChartDatas"
+        [options]="activitiesChartOptions"
+      ></p-chart>
+      <p-chart
+      type="doughnut"
+      [data]="activitiesDonutChartDatas"
+      [options]="activitiesDonutChartOptions"></p-chart>
+    </div>
+    <div style="height: 200px;">
+      <p-chart
+      type="bar"
+      [data]="hoursLineChartDatas"
+      [options]="hoursLineChartOptions"></p-chart>
+      <p-chart
+      type="doughnut"
+      [data]="projectsDonutChartDatas"
+      [options]="projectsDonutChartOptions"></p-chart>
+    </div>
+
   </p-card>
 </div>
