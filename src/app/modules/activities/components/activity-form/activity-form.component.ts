@@ -160,7 +160,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
           endDate: this.activitySelectedDatas?.endDate,
           status: this.activitySelectedDatas?.status,
           responsableUser: String(this.activitySelectedDatas?.idResponsableUser.id),
-          project: String(this.activitySelectedDatas?.idProjects.id)
+          project: String(this.activitySelectedDatas?.projectId.id)
         })
       }
       else if (activityFilter && this.activityAction?.event?.action === this.hoursActivityAction){
@@ -224,10 +224,10 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         startDate: startDate,
         endDate: endDate,
         status: this.addActivityForm.value.status as string,
-        idProjects: Number(this.addActivityForm.value.project),
+        projectId: Number(this.addActivityForm.value.project),
         idResponsableUser: Number(this.addActivityForm.value.responsableUser)
       };
-
+      console.log(requestCreateActivity)
       this.activitiesService.createActivity(requestCreateActivity)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -264,7 +264,7 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         startDate: this.editActivityForm.value.startDate as string,
         endDate: this.editActivityForm.value.endDate as string,
         status: this.editActivityForm.value.status as string,
-        idProjects: Number(this.editActivityForm.value.project),
+        projectId: Number(this.editActivityForm.value.project),
         idResponsableUser: Number(this.editActivityForm.value.responsableUser)
       };
 
@@ -352,9 +352,6 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         startDate: this.formatDateTime(new Date(this.editingEntry.startDate), this.editingEntry.startHour),
         endDate: this.formatDateTime(new Date(this.editingEntry.startDate), this.editingEntry.endHour)
       };
-      console.log(typeof(updatedEntry.idActivity))
-      console.log(typeof(updatedEntry.id))
-      console.log(typeof(updatedEntry.idUser))
       this.hoursService
         .editHour(updatedEntry)
         .pipe(takeUntil(this.destroy$))

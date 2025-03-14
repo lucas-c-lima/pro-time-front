@@ -89,7 +89,6 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
     id: number,
     name: string
   }): void {
-    console.log(event)
     if(event){
       this.confirmationService.confirm({
         message: `Deseja realmente deletar a atividade: ${event?.name}?`,
@@ -112,7 +111,7 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
           this.messageService.add({
             severity: 'success',
             summary: 'Sucesso',
-            detail: 'Produto removido com sucesso!',
+            detail: 'Atividade removida com sucesso!',
             life: 2500
           });
           this.getAPIActivitiesDatas();
@@ -121,7 +120,7 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
           this.messageService.add({
             severity: 'error',
             summary: 'Erro',
-            detail: 'Erro ao remover produto!',
+            detail: 'Erro ao remover atividade!',
             life: 2500
           })
         }

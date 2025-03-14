@@ -5,6 +5,6 @@ export interface DeleteActivityResponse{
   startDate: string,
   endDate: string,
   status: string,
-  idProjects: number,
+  projectId: number,
   idResponsableUser: number
 }

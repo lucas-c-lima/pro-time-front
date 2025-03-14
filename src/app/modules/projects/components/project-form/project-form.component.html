@@ -19,7 +19,7 @@
       <p-dropdown
       styleClass="w-full"
       [options]="projectDatas"
-      [(ngModel)]="selectedProject"
+      [(ngModel)]="this.activitiesDatas"
       optionLabel="name"
       optionValue="id"
       placeholder="Selecione um projeto"
@@ -216,4 +216,70 @@
       </ng-template>
     </p-table>
   </div>
+</div>
+
+<!-- FORMULÁRIO ADICIONAR PROJETO -->
+<div *ngIf="activityAction?.event?.action === null">
+  <form
+  [formGroup]="addProjectForm"
+  (ngSubmit)="handleSubmitAddProject()">
+
+    <div class="card flex flex-column md:flex-column gap-3">
+      <!-- Nome -->
+      <input pInputText placeholder="Nome" formControlName="name">
+      <!-- Descrição -->
+      <input pInputTextarea placeholder="Descrição" formControlName="description">
+      <div class="flex flex-row gap-3">
+        <!-- Data de inicio -->
+        <p-calendar
+        styleClass="custom-calendar"
+        formControlName="startDate"
+        placeholder="Selecione uma data de inicio"
+        dateFormat="dd/mm/yy"
+        [minDate]="minDate"
+        appendTo="body"></p-calendar>
+        <!-- Data de conclusão -->
+        <p-calendar
+        styleClass="custom-calendar"
+        formControlName="endDate"
+        placeholder="Selecione uma data limite"
+        dateFormat="dd/mm/yy"
+        [minDate]="minDate"
+        appendTo="body"></p-calendar>
+        <!-- Status -->
+        <p-dropdown
+        [options]="projectStatusOptions"
+        optionLabel="name"
+        optionValue="name"
+        placeholder="Selecione o status"
+        formControlName="status"></p-dropdown>
+      </div>
+      <!-- Responsável -->
+      <p-dropdown
+      styleClass="w-full"
+      [options]="usersDatas"
+      [(ngModel)]="selectedUsers"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecione um responsável"
+      formControlName="responsableUser"></p-dropdown>
+      <!-- Priority -->
+      <p-dropdown
+      styleClass="w-full"
+      [options]="projectPriorityOptions"
+      [(ngModel)]="this.activitiesDatas"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecione a prioridade"
+      formControlName="priority"></p-dropdown>
+
+
+      <div class="flex flex-row justify-content-center align-items-center m-1">
+        <p-button
+        [disabled]="!addProjectForm.valid"
+        type="submit"
+        label="Concluir"></p-button>
+      </div>
+    </div>
+  </form>
 </div>

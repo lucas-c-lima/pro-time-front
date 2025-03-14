@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module'
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -19,12 +19,18 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ProjectsHomeComponent } from './projects-home/projects-home.component';
 import { RouterModule } from '@angular/router';
 import { PROJECTS_ROUTES } from './projects.routing';
-
-
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { ProjectTableComponent } from './components/project-table/project-table.component';
+import { ProjectFormComponent } from './components/project-form/project-form.component';
+import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
-    ProjectsHomeComponent
+    ProjectsHomeComponent,
+    ProjectDetailsComponent,
+    ProjectTableComponent,
+    ProjectFormComponent,
   ],
   imports: [
     CommonModule,
@@ -44,9 +50,13 @@ import { PROJECTS_ROUTES } from './projects.routing';
     InputNumberModule,
     DynamicDialogModule,
     DropdownModule,
+    DynamicDialogModule,
     ConfirmDialogModule,
     TooltipModule,
+    DatePipe,
+    CalendarModule,
+    ToastModule
 ],
-  providers: [DialogService, ConfirmationService]
+  providers: [DialogService, ConfirmationService, MessageService, DatePipe]
 })
 export class ProjectsModule { }

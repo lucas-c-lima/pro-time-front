@@ -1,10 +1,10 @@
-export interface EditActivityRequest{
+export interface CreateProjectResponse{
   id: number,
   name: string,
   description: string,
   startDate: string,
   endDate: string,
   status: string,
-  projectId: number,
-  idResponsableUser: number
+  idResponsableUser: number,
+  priority: string
 }

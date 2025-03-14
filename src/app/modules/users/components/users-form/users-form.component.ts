@@ -121,8 +121,6 @@ export class UsersFormComponent implements OnInit, OnDestroy{
         deleted: this.editUserForm.value.deleted as boolean
       };
 
-      console.log(requestEditUser)
-
       this.usersService
       .editUser(requestEditUser)
       .pipe(takeUntil(this.destroy$))

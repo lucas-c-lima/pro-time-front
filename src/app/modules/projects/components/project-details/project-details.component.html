@@ -1,7 +1,43 @@
-<div class="container-card" >
+<div class="container-card"
+>
   <p-card class="card-content">
     <div class="header-container">
-      <span class="header-title">Minhas atividades</span>
+      <span class="header-title">
+        <button
+        (click)="backToProjects()">
+          <i class="pi pi-arrow-left"></i>
+          Projetos
+        </button>
+        <br>
+        <div>
+          <span *ngIf="editingProject === null">
+            {{project.name}}
+          </span>
+          <span *ngIf="editingProject !== null">
+            <input type="text" [(ngModel)]="editingProject.name">
+          </span>
+          <div *ngIf="editingProject === null">
+            <button
+            (click)="startEditing(this.project)">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button
+            (click)="handleDeleteProject(project.id, project.name)">
+              <i class="pi pi-trash"></i>
+            </button>
+          </div>
+          <div *ngIf="editingProject !== null">
+            <button
+            (click)="handleSubmitEditProject()">
+              <i class="pi pi-check"></i>
+            </button>
+            <button
+            (click)="cancelEditing()">
+              <i class="pi pi-times"></i>
+            </button>
+          </div>
+        </div>
+      </span>
       <button
         class="add-activity"
         (click)="handleActivityEvent(addActivityEvent)">
@@ -9,6 +45,46 @@
           <span>Adicionar atividade</span>
       </button>
     </div>
+    <div *ngIf="editingProject === null">
+      descrição: {{project.description}}<br>
+      {{project.idResponsableUser.name}}<br>
+      {{formatDateRange(project.startDate, project.endDate)}}<br>
+      {{project.priority}}<br>
+      {{project.status}}
+    </div>
+    <div *ngIf="editingProject !== null">
+      descrição: <input type="text" [(ngModel)]="editingProject.description"><br>
+      Responsável: <p-dropdown
+      [options]="usersDatas"
+      [(ngModel)]="editingProject.idResponsableUser.id"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecione um responsável"></p-dropdown> <br>
+      Data: <p-calendar
+        placeholder="Dia"
+        dateFormat="dd/mm/yy"
+        [(ngModel)]="editingProject.startDate"
+        appendTo="body"></p-calendar> -
+      <p-calendar
+      placeholder="Dia"
+      dateFormat="dd/mm/yy"
+      [(ngModel)]="editingProject.endDate"
+      appendTo="body"></p-calendar><br>
+      Prioridade: <p-dropdown
+      [options]="projectPriorityOptions"
+      [(ngModel)]="editingProject.priority"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecione um responsável"></p-dropdown> <br>
+      Status: <p-dropdown
+      [options]="projectStatusOptions"
+      [(ngModel)]="editingProject.status"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecione um responsável"></p-dropdown>
+    </div>
+
+
     <p-table
     #activitiesTable
     [value]="activities"
@@ -21,9 +97,7 @@
     [rowHover]="true"
     dataKey="id"
     [showCurrentPageReport]="true"
-    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} atividades"
-    [sortField]="'deleted'"
-    [sortOrder]="1">
+    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} atividades">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="name" >
@@ -131,17 +205,18 @@
           <td class="truncate">
             <div class="activity-container">
               <div class="activity-name">
-                <button class="activity-mark-container" pTooltip="Registrar horas" tooltipPosition="top">
+                <!-- <button class="activity-mark-container" pTooltip="Registrar horas" tooltipPosition="top">
                   <i class="pi pi-plus-circle activity-mark"
+                  ></i>
+
                   [ngClass]="getIconClass(activity?.status)"
-                  (click)="activity?.status !== 'CONCLUIDA' && handleActivityEvent(hoursActivityAction,activity?.id); $event.stopPropagation()"></i>
-                </button>
-                <span [ngStyle]="{'text-decoration': activity?.deleted ? 'line-through' : 'none'}">
-                  {{activity?.name}}
-                </span>
+                  (click)="activity?.status !== 'CONCLUIDA' && handleActivityEvent(hoursActivityAction,activity?.id); $event.stopPropagation()"
+                </button> -->
+                {{activity?.name}}
               </div>
               <i class="pi pi-trash activity-trash"
-              (click)="handleDeleteActivity(activity?.id, activity?.name); $event.stopPropagation()"></i>
+              ></i>
+              <!-- (click)="handleDeleteActivity(activity?.id, activity?.name); $event.stopPropagation()" -->
             </div>
           </td>
           <td class="truncate-text">{{formatDateRange(activity?.startDate, activity?.endDate)}}</td>

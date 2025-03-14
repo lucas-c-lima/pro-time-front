@@ -2,7 +2,7 @@ export interface GetAllEntriesResponse{
   id: number,
   idActivities: {
     id: number;
-    idProjects: {
+    projectId: {
       id: number;
       name: string;
       description: string;

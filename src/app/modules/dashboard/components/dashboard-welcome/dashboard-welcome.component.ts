@@ -50,7 +50,7 @@ export class DashboardWelcomeComponent implements OnInit, OnDestroy{
   loadUser(): void{
     const userId = this.cookie.get('USER_ID');
     if(userId){
-      this.UserService.getUserById(userId)
+      this.UserService.getUserById(Number(userId))
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         user => {

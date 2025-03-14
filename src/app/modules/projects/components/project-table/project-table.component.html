@@ -1,0 +1,131 @@
+<div class="container-card"
+>
+  <p-card class="card-content">
+    <div class="header-container">
+      <span class="header-title">Projetos</span>
+      <button
+        class="add-activity"
+        (click)="handleNewProject()">
+          <i class="pi pi-plus"></i>
+          <span>Criar projeto</span>
+      </button>
+    </div>
+    <p-table
+    #projectsActivitiesTable
+    [value]="projects"
+    [rows]="10"
+    [paginator]="true"
+    [responsive]="true"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{'min-width': '75rem'}"
+    [(selection)]="activitySelected"
+    [rowHover]="true"
+    dataKey="id"
+    [showCurrentPageReport]="true"
+    [sortField]="'status'"
+    [sortOrder]="-1"
+    currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} projetos">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name" >
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Nome
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false">
+              </p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="idResponsableUser.name" class="truncate-title">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Responsável
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="idResponsableUser.name"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="idResponsableUser.name"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false">
+              </p-columnFilter>
+            </div>
+          </div>
+        </th>
+        <th pSortableColumn="" class="truncate-title">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center" class="truncate-title-text">
+              Prioridade
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field=""></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field=""
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false">
+              </p-columnFilter>
+            </div>
+          </div>
+        </th>
+
+        <th pSortableColumn="status" class="truncate-title">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-between align-items-center">
+              Status
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter
+              type="text"
+              field="status"
+              display="menu"
+              [showMenu]="false"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false">
+              </p-columnFilter>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-project>
+      <tr
+      (click)="onProjectClick(project)"
+      class="table-body">
+        <td class="truncate">
+          <div class="activity-container">
+            <div class="activity-name">
+              <i class="pi pi-folder-open activity-mark"></i>
+              {{project.name}}
+            </div>
+          </div>
+        </td>
+        <td class="truncate-text">{{project.idResponsableUser?.name}}</td>
+        <td class="truncate-text">{{project.priority}}</td>
+        <td class="truncate-text">{{project.status}}</td>
+      </tr>
+    </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+<div *ngIf="addProjectForm"></div>

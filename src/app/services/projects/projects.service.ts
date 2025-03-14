@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { map, Observable } from 'rxjs';
+import { CreateProjectRequest } from 'src/app/models/interface/projects/request/CreateProjectRequest';
+import { EditProjectRequest } from 'src/app/models/interface/projects/request/EditProjectRequest';
+import { CreateProjectResponse } from 'src/app/models/interface/projects/response/CreateProjectResponse';
 import { GetAllProjectsResponse } from 'src/app/models/interface/projects/response/GetAllProjectsResponse';
 import { environment } from 'src/environments/environments';
 
@@ -28,9 +31,35 @@ export class ProjectsService {
       `${this.API_URL}/projects`,
       this.httpOptions
     )
-    // // FILTROS!!!!
-    // .pipe(
-    //   map((project) => project.filter((data) => data?.status == "EM_ANDAMENTO"))
-    // )
   }
+
+  getProjectById(projectId: number): Observable<GetAllProjectsResponse>{
+    return this.http.get<GetAllProjectsResponse>(
+      `${this.API_URL}/projects/${projectId}`,
+      this.httpOptions
+    )
+  }
+
+  createProject(requestDatas: CreateProjectRequest): Observable<CreateProjectResponse>{
+    return this.http.post<CreateProjectResponse>(
+      `${this.API_URL}/projects`, requestDatas,
+      this.httpOptions
+    )
+  }
+
+  editProject(requestDatas: EditProjectRequest): Observable<EditProjectRequest>{
+    console.log(requestDatas)
+    return this.http.put<EditProjectRequest>(
+      `${this.API_URL}/projects/${requestDatas.id}`, requestDatas,
+      this.httpOptions
+    )
+  }
+
+  deleteProject(projectId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.API_URL}/projects/${projectId}`,
+      this.httpOptions
+    )
+  }
+
 }

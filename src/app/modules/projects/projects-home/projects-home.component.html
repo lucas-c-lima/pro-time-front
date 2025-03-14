@@ -3,14 +3,23 @@
   <app-menu-navigation></app-menu-navigation>
   <main>
     <app-toolbar-navigation></app-toolbar-navigation>
-    <div class="top-message">
-      <h1>PROJETOS</h1>
-    </div>
-
-
-
+    <app-project-table
+    *ngIf="!selectedProject"
+    class="content"
+    [projects]="projectsDatas"
+    (projectSelected)="onProjectSelected($event)"
+    ></app-project-table>
+    <app-project-details
+    *ngIf="selectedProject"
+    [project]="selectedProject"
+    [reload]="reload"
+    (deleteProjectEvent)="handleDeleteProject($event)"
+    (backToProjectsEvent)="backToProjects()"
+    (activityEvent)="handleProjectActivityAction($event)"
+    ></app-project-details>
   </main>
 </div>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
 
 

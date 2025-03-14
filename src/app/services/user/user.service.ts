@@ -53,7 +53,7 @@ export class UserService {
     )
   }
 
-  getUserById(userId: string): Observable<GetAllUsersResponse>{
+  getUserById(userId: number): Observable<GetAllUsersResponse>{
     return this.http.get<GetAllUsersResponse>(
       `${this.API_URL}/users/${userId}`,
       this.httpOptions

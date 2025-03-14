@@ -29,6 +29,7 @@ export class ActivitiesTableComponent {
   loadActivities(): void {
     this.activitiesService.getAllActivities().subscribe((activities) => {
       this.activities = activities;
+      console.log(this.activities)
     });
   }
 

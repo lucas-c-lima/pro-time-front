@@ -1,6 +1,6 @@
 export interface GetAllActivitiesResponse{
   id: number;
-  idProjects: {
+  projectId: {
     id: number;
     name: string;
     description: string;
@@ -34,4 +34,5 @@ export interface GetAllActivitiesResponse{
     lastLogin: string;
   },
   creationDate: string;
+  deleted: string
 }
