@@ -257,8 +257,8 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
 
   handleSubmitEditActivity(): void{
     if(this.editActivityForm.value && this.editActivityForm.valid && this.activityAction.event.id){
-      const startDate = this.formatDate(this.editActivityForm.value.startDate);
-      const endDate = this.formatDate(this.editActivityForm.value.endDate);
+      const startDate = typeof(this.editActivityForm.value.startDate) !== 'string' ? this.formatDate(this.editActivityForm.value.startDate) : this.editActivityForm.value.startDate
+      const endDate = typeof(this.editActivityForm.value.endDate) !== 'string' ? this.formatDate(this.editActivityForm.value.endDate) : this.editActivityForm.value.endDate
 
       const requestEditActivity: EditActivityRequest = {
         id: Number(this.activityAction?.event?.id),
