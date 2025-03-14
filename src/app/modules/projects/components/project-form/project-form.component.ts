@@ -451,7 +451,6 @@ export class ProjectFormComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
-            console.log(response)
             if (response) {
               this.messageService.add({
                 severity: 'success',

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
 import { DeleteActivityAction } from 'src/app/models/interface/activities/event/DeleteActivityAction';
 import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
@@ -16,11 +17,13 @@ export class ActivitiesTableComponent {
   @Output() activityEvent = new EventEmitter<EventAction>();
   @Output() deleteActivityEvent = new EventEmitter<DeleteActivityAction>();
 
+  userIdValue :string = this.cookie.get('USER_PROFILE');
+
   public activitySelected!: GetAllActivitiesResponse;
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityEvent = ActivityEvent.EDIT_ACTIVITY_EVENT;
   public hoursActivityAction = ActivityEvent.HOURS_ACTIVITY_EVENT;
-  constructor(private activitiesService: ActivitiesService) {}
+  constructor(private activitiesService: ActivitiesService, private cookie: CookieService) {}
 
   ngOnInit(): void {
     this.loadActivities();

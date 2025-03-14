@@ -177,7 +177,6 @@ export class InsightInfosComponent implements OnInit{
       return startDateEntry >= startDate || endDateEntry >= startDate;
     });
 
-    console.log(this.projects)
     this.filteredProjects = this.projects.filter(project => {
       if (project.creationDate !== null) {
         const projectDate = this.convertToISO(project.creationDate);

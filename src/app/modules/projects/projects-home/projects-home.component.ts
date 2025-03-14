@@ -118,7 +118,6 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
             this.getAPIProjectsDatas()
             this.getAPIActivitiesDatas()
             this.toReload('reload');
-            console.log('close home')
           },
         })
       }

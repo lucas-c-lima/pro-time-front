@@ -16,7 +16,7 @@
           <span *ngIf="editingProject !== null">
             <input type="text" [(ngModel)]="editingProject.name">
           </span>
-          <div *ngIf="editingProject === null">
+          <div *ngIf="editingProject === null && userIdValue === 'ADMIN'">
             <button
             (click)="startEditing(this.project)">
               <i class="pi pi-pencil"></i>
@@ -39,6 +39,7 @@
         </div>
       </span>
       <button
+        *ngIf="userIdValue === 'ADMIN'"
         class="add-activity"
         (click)="handleActivityEvent(addActivityEvent)">
           <i class="pi pi-plus"></i>

@@ -15,12 +15,27 @@ const routes: Routes = [
   component: HomeComponent
 },
 {
+  path: 'activities',
+  loadChildren: () =>
+    import('./modules/activities/activities.module').then(
+      (m) => m.ActivitiesModule
+    ),
+  canActivate: [AuthGuard]
+},
+{
   path: 'dashboard',
   loadChildren: () =>
     import('./modules/dashboard/dashboard.module').then(
     (m) => m.DashboardModule
   ),
   canActivate: [AuthGuard]
+},
+{
+  path: 'projects',
+  loadChildren: () => import('./modules/projects/projects.module').then(
+    (m) => m.ProjectsModule
+  ),
+  canActivate: [AuthGuard],
 },
 
 //-------------- ADMIN

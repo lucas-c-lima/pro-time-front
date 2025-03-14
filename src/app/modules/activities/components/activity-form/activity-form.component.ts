@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { elementAt, Subject, takeUntil } from 'rxjs';
@@ -29,6 +30,9 @@ import { ActivitiesDataTransferService } from 'src/app/shared/services/activitie
 })
 export class ActivityFormComponent implements OnInit, OnDestroy{
   private readonly destroy$: Subject<void> = new Subject();
+
+  public userProfileValue = this.cookie.get("USER_PROFILE")
+  public userIdValue = Number(this.cookie.get("USER_ID"))
 
   public projectDatas: Array<GetAllProjectsResponse> = [];
   public selectedProject: Array<{name: string; code: string}> = [];
@@ -97,7 +101,8 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     private messageService: MessageService,
     private router: Router,
     private datePipe: DatePipe,
-    public ref: DynamicDialogConfig
+    public ref: DynamicDialogConfig,
+    public cookie: CookieService
   ){}
 
   ngOnInit(): void {
@@ -227,7 +232,6 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
         projectId: Number(this.addActivityForm.value.project),
         idResponsableUser: Number(this.addActivityForm.value.responsableUser)
       };
-      console.log(requestCreateActivity)
       this.activitiesService.createActivity(requestCreateActivity)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

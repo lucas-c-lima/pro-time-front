@@ -10,6 +10,7 @@ import { GetAllProjectsResponse } from 'src/app/models/interface/projects/respon
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
 import { ProjectFormComponent } from '../project-form/project-form.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-project-table',
@@ -18,6 +19,8 @@ import { ProjectFormComponent } from '../project-form/project-form.component';
 })
 export class ProjectTableComponent {
 private readonly destroy$: Subject<void> = new Subject();
+
+userIdValue :string = this.cookie.get('USER_PROFILE');
 
   @Input() projects: Array<GetAllProjectsResponse> = [];
   @Output() projectSelected = new EventEmitter<GetAllProjectsResponse>();
@@ -39,7 +42,8 @@ private readonly destroy$: Subject<void> = new Subject();
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
     private activitiesService: ActivitiesService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private cookie: CookieService
   ){}
 
   ngOnInit(): void {

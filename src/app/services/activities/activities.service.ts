@@ -41,6 +41,13 @@ export class ActivitiesService {
     )
   }
 
+  getActivitiesByUser(userId: number): Observable<Array<GetAllActivitiesResponse>>{
+    return this.http.get<Array<GetAllActivitiesResponse>>(
+      `${this.API_URL}/activities/user/${userId}`,
+      this.httpOptions
+    )
+  }
+
   createActivity(requestDatas: CreateActivityRequest): Observable<CreateActivityResponse>{
     return this.http.post<CreateActivityResponse>(
       `${this.API_URL}/activities`, requestDatas,

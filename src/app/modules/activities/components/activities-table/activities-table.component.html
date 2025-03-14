@@ -2,7 +2,7 @@
   <p-card class="card-content">
     <div class="header-container">
       <span class="header-title">Minhas atividades</span>
-      <button
+      <button *ngIf="userIdValue === 'ADMIN'"
         class="add-activity"
         (click)="handleActivityEvent(addActivityEvent)">
           <i class="pi pi-plus"></i>
@@ -140,7 +140,7 @@
                   {{activity?.name}}
                 </span>
               </div>
-              <i class="pi pi-trash activity-trash"
+              <i class="pi pi-trash activity-trash" *ngIf="userIdValue === 'ADMIN'"
               (click)="handleDeleteActivity(activity?.id, activity?.name); $event.stopPropagation()"></i>
             </div>
           </td>

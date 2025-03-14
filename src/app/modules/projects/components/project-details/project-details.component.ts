@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
@@ -24,6 +25,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy, OnChanges{
   private readonly destroy$: Subject<void> = new Subject();
+
+  userIdValue :string = this.cookie.get('USER_PROFILE');
   @Input() project!: GetAllProjectsResponse;
   @Input() reload: string = '';
   @Output() backToProjectsEvent = new EventEmitter<void>();
@@ -58,6 +61,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy, OnChanges{
     private datePipe: DatePipe,
     private projectService: ProjectsService,
     private messageService: MessageService,
+    private cookie: CookieService
 ) {}
 
   ngOnInit(): void {
@@ -68,7 +72,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy, OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['reload']) {
       if(this.reload === 'reload'){
-        console.log('reload')
         this.activitiesService.getActivitiesByProject(this.project.id).subscribe((activities) => {
           this.activities = activities;
         });
@@ -168,7 +171,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy, OnChanges{
       idResponsableUser: this.editingProject.idResponsableUser.id,
       priority: this.editingProject.priority
     }
-    console.log(updatedProject)
     this.projectService
     .editProject(updatedProject)
     .pipe(takeUntil(this.destroy$))

@@ -48,7 +48,6 @@ export class ProjectsService {
   }
 
   editProject(requestDatas: EditProjectRequest): Observable<EditProjectRequest>{
-    console.log(requestDatas)
     return this.http.put<EditProjectRequest>(
       `${this.API_URL}/projects/${requestDatas.id}`, requestDatas,
       this.httpOptions

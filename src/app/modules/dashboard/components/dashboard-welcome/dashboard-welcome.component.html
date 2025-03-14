@@ -17,29 +17,169 @@
           <p-dropdown
           class="teste"
           [options]="periodSelect"
-          (onChange)="onPeriodChange($event)"></p-dropdown>
+          (onChange)="onPeriodChange()"></p-dropdown>
           <div class="separator-v"></div>
         </div>
         <div class="hours-counter">
           <i class="pi pi-clock"></i>
-          {{hoursCount}} Horas registradas
+          {{filteredHoursCount}} Horas registradas
         </div>
         <div class="completed-counter">
           <i class="pi pi-check"></i>
-          {{hoursCount}} Tarefas finalizadas
+          {{completedTasksCount}} Tarefas finalizadas
         </div>
       </div>
     </div>
     <div class="main-info-container">
       <div class="dash-activity-container">
         <div class="main-info-header">
-          <i class="pi pi-check-circle"></i>
-          Minhas atividades</div>
+          <div>
+            <i class="pi pi-check-circle"></i>
+            Minhas atividades</div>
+          </div>
+          <div>
+            <p-table
+            [value]="activities"
+            [rows]="5"
+            [responsive]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name" >
+                <div class="flex justify-content-between align-items-center">
+                  <div class="flex justify-content-between align-items-center">
+                    Nome da tarefa
+                  </div>
+                  <div class="flex justify-content-between align-items-center">
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                    type="text"
+                    field="name"
+                    display="menu"
+                    matchMode="contains"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false">
+                    </p-columnFilter>
+                  </div>
+                </div>
+              </th>
+              <th pSortableColumn="endDate" class="truncate-title">
+                <div class="flex justify-content-between align-items-center" >
+                  <div class="flex justify-content-between align-items-center" class="truncate-title-text">
+                    Duração
+                  </div>
+                  <div class="flex justify-content-between align-items-center">
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                    type="text"
+                    field="endDate"
+                    display="menu"
+                    [showMenu]="false"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false">
+                    </p-columnFilter>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-activity>
+            <tr>
+              <td class="truncate">
+                <div class="activity-container">
+                  <div class="activity-name">
+                    <button class="activity-mark-container" pTooltip="Registrar horas" tooltipPosition="top">
+                      <i class="pi pi-plus-circle activity-mark"></i>
+                    </button>
+                    <span [ngStyle]="{'text-decoration': activity?.deleted ? 'line-through' : 'none'}">
+                      {{activity?.name}}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="truncate-text">{{formatDateRange(activity?.startDate, activity?.endDate)}}</td>
+            </tr>
+          </ng-template>
+          </p-table>
+          </div>
         </div>
         <div class="dash-projects-container">
+
+
         <div class="main-info-header">
-          <i class="pi pi-folder"></i>
-          Projetos</div>
+          <div>
+            <i class="pi pi-clock"></i>
+          Lançamentos</div>
+          </div>
+          <div>
+            <p-table
+            [value]="hours"
+            [rows]="5"
+            [responsive]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name" >
+                <div class="flex justify-content-between align-items-center">
+                  <div class="flex justify-content-between align-items-center">
+                    Nome da tarefa
+                  </div>
+                  <div class="flex justify-content-between align-items-center">
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                    type="text"
+                    field="name"
+                    display="menu"
+                    matchMode="contains"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false">
+                    </p-columnFilter>
+                  </div>
+                </div>
+              </th>
+              <th pSortableColumn="endDate" class="truncate-title">
+                <div class="flex justify-content-between align-items-center" >
+                  <div class="flex justify-content-between align-items-center" class="truncate-title-text">
+                    Duração
+                  </div>
+                  <div class="flex justify-content-between align-items-center">
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter
+                    type="text"
+                    field="endDate"
+                    display="menu"
+                    [showMenu]="false"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false">
+                    </p-columnFilter>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-hours>
+            <tr>
+              <td class="truncate">
+                <div class="activity-container">
+                  <div class="activity-name">
+                    <button class="activity-mark-container" pTooltip="Registrar horas" tooltipPosition="top">
+                      <i class="pi pi-plus-circle activity-mark"></i>
+                    </button>
+                    <span>
+                      {{hours?.idActivities.name}}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="truncate-text">{{calculateHours(hours?.startDate, hours?.endDate)}} horas</td>
+            </tr>
+          </ng-template>
+          </p-table>
+          </div>
       </div>
     </div>
   </p-card>

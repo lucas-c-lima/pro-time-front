@@ -204,7 +204,7 @@
             <input type="time" [(ngModel)]="editingEntry.endHour">
           </td>
           <td>{{editingEntry.registerDate}}</td>
-          <td>
+          <td *ngIf="(userIdValue === this.activitySelectedDatas.idResponsableUser.id) || userProfileValue === 'ADMIN'">
             <button pTooltip="Confirmar" tooltipPosition="top" (click)="handleSubmitEditHours()">
               <i class="pi pi-check"></i>
             </button>

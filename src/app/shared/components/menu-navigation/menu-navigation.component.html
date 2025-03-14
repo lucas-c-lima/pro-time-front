@@ -32,26 +32,26 @@
 
 
   <!-- ADMIN -->
-  <div class="separator"></div>
+  <div class="separator" *ngIf="userIdValue === 'ADMIN'"></div>
 
-  <h2 class="title">Administração</h2>
+  <h2 class="title" *ngIf="userIdValue === 'ADMIN'">Administração</h2>
 
-  <button routerLink="/admin/users" routerLinkActive="active">
+  <button routerLink="/admin/users" routerLinkActive="active" *ngIf="userIdValue === 'ADMIN'">
     <i class="pi pi-users"></i>
     <span>Usuários</span>
   </button>
 
-  <button routerLink="/admin/activities" routerLinkActive="active">
+  <button routerLink="/admin/activities" routerLinkActive="active" *ngIf="userIdValue === 'ADMIN'">
     <i class="pi pi-check-circle"></i>
     <span>Atividades</span>
   </button>
 
-  <button routerLink="/admin/projects" routerLinkActive="active">
+  <button routerLink="/admin/projects" routerLinkActive="active" *ngIf="userIdValue === 'ADMIN'">
     <i class="pi pi-folder"></i>
     <span>Projetos</span>
   </button>
 
-  <button routerLink="/admin/insights" routerLinkActive="active">
+  <button routerLink="/admin/insights" routerLinkActive="active" *ngIf="userIdValue === 'ADMIN'">
     <i class="pi pi-chart-line"></i>
     <span>Relatórios - Admin</span>
   </button>

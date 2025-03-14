@@ -4,6 +4,7 @@
     <div class="header-container">
       <span class="header-title">Projetos</span>
       <button
+      *ngIf="userIdValue === 'ADMIN'"
         class="add-activity"
         (click)="handleNewProject()">
           <i class="pi pi-plus"></i>

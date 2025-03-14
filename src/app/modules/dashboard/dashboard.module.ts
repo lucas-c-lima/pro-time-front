@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardWelcomeComponent } from './components/dashboard-welcome/dashboard-welcome.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -34,6 +35,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CardModule,
     ToastModule,
     DropdownModule,
+    TableModule,
     //Shared
     SharedModule
   ],
