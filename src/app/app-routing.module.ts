@@ -46,6 +46,13 @@ const routes: Routes = [
   ),
   canActivate: [AuthGuard],
 },
+{
+  path: 'admin/insights',
+  loadChildren: () => import('./modules/insights/insights.module').then(
+    (m) => m.InsightsModule
+  ),
+  canActivate: [AuthGuard],
+}
 
 ];
 
