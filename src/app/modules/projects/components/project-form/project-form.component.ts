@@ -147,7 +147,6 @@ export class ProjectFormComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log(response)
           if (response.length > 0){
             this.projectDatas = response
           }

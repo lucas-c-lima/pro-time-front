@@ -210,7 +210,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   startEditing(project: GetAllProjectsResponse): void{
-    console.log(project)
     this.editingProject = {
       ...project,
       idResponsableUser: project.idResponsableUser,

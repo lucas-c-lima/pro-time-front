@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ChartData, ChartOptions } from 'chart.js';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject, takeUntil } from 'rxjs';
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 import { GetAllEntriesResponse } from 'src/app/models/interface/hours/response/GetAllEntriesResponse';
@@ -54,20 +56,47 @@ export class InsightInfosComponent implements OnInit{
   public projectsDonutChartDatas!: ChartData;
   public projectsDonutChartOptions!: ChartOptions;
 
+  private adminRoute = ''
+  private userId = this.cookie.get("USER_ID")
+
   constructor(
     private activitiesService: ActivitiesService,
     private projectsService: ProjectsService,
     private userService: UserService,
     private hoursService: HoursService,
     private datePipe: DatePipe,
+    private route: Router,
+    private cookie: CookieService
   ){
+    route.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.adminRoute = event.url
+      }
+    });
   }
 
   ngOnInit(): void {
+    this.checkRouteAndLoadData()
+  }
+
+  checkRouteAndLoadData(): void {
+    if (this.adminRoute == '/admin/insights') {
+      this.loadAllData();
+    } else {
+      this.loadUserData();
+    }
+  }
+
+  loadAllData(): void {
     this.loadHours()
     this.loadProjects()
     this.loadActivities()
-    this.loadUsers()
+  }
+
+  loadUserData(){
+    this.loadUserHours()
+    this.loadUserProjects()
+    this.loadUserActivities()
   }
 
   // LOADS ------------------------
@@ -83,13 +112,29 @@ export class InsightInfosComponent implements OnInit{
       this.projects = projects;
     });
   }
-  loadUsers(): void{
-    this.userService.getAllUsers().pipe(takeUntil(this.destroy$)).subscribe((users) => {
-      this.users = users;
-    });
-  }
   loadHours(): void{
     this.hoursService.getAllHours().pipe(takeUntil(this.destroy$)).subscribe((hours) => {
+      this.hours = hours;
+    });
+  }
+
+
+
+
+  loadUserActivities():void{
+    this.activitiesService.getActivitiesByUser(Number(this.userId)).pipe(takeUntil(this.destroy$)).subscribe((activities) => {
+      this.activities = activities;
+      this.updateActivityCounts()
+      this.onFilterChange()
+    });
+  }
+  loadUserProjects(): void{
+    this.projectsService.getProjectsByUser(Number(this.userId)).pipe(takeUntil(this.destroy$)).subscribe((projects) => {
+      this.projects = projects;
+    });
+  }
+  loadUserHours(): void{
+    this.hoursService.getHoursByUser(Number(this.userId)).pipe(takeUntil(this.destroy$)).subscribe((hours) => {
       this.hours = hours;
     });
   }
@@ -176,7 +221,6 @@ export class InsightInfosComponent implements OnInit{
       const endDateEntry = this.convertToISO(entry.endDate);
       return startDateEntry >= startDate || endDateEntry >= startDate;
     });
-
     this.filteredProjects = this.projects.filter(project => {
       if (project.creationDate !== null) {
         const projectDate = this.convertToISO(project.creationDate);

@@ -71,8 +71,6 @@ export class UsersFormComponent implements OnInit, OnDestroy{
     ){
       this.getUserSelectedDatas(Number(this.userAction?.event?.id) as number);
     }
-
-    // TODO Get All Activities from one user
   }
 
   handleSubmitAddUser(): void {

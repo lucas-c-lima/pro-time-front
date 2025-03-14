@@ -40,6 +40,13 @@ export class ProjectsService {
     )
   }
 
+  getProjectsByUser(userId: number): Observable<Array<GetAllProjectsResponse>>{
+    return this.http.get<Array<GetAllProjectsResponse>>(
+      `${this.API_URL}/projects/users/${userId}`,
+      this.httpOptions
+    )
+  }
+
   createProject(requestDatas: CreateProjectRequest): Observable<CreateProjectResponse>{
     return this.http.post<CreateProjectResponse>(
       `${this.API_URL}/projects`, requestDatas,

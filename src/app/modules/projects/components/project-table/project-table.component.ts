@@ -76,7 +76,6 @@ userIdValue :string = this.cookie.get('USER_PROFILE');
           activitiesDatas: this.activitiesDatas,
         }
       });
-      console.log('close table')
       this.ref.onClose
       .pipe(takeUntil(this.destroy$))
       .subscribe({
