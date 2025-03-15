@@ -121,6 +121,7 @@
     <ng-template pTemplate="body" let-user>
       <tr
       class="table-body"
+      [ngClass]="getDeleted(user?.deleted)"
       (click)="handleUserEvent(editUserEvent, user?.id)">
         <td class="truncate">
           <div class="user-container">
@@ -133,10 +134,15 @@
         </td>
         <td class="truncate">{{user?.email}}</td>
         <td class="truncate">{{user?.lastLogin}}</td>
-        <td class="truncate"
-        [ngClass]="getProfileClass(user?.profile)"
-        >{{formatProfile(user?.profile)}}</td>
-        <td class="truncate">{{user?.deleted}}</td>
+        <td class="truncate">
+            <div [ngClass]="getProfileClass(user?.profile)">
+            {{formatProfile(user?.profile)}}
+            </div>
+          </td>
+        <td class="truncate">
+          <i class="pi pi-user"
+          [ngClass]="getDeleted(user?.deleted)"></i>
+        </td>
       </tr>
     </ng-template>
 

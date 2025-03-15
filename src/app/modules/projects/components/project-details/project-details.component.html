@@ -4,37 +4,42 @@
     <div class="header-container">
       <span class="header-title">
         <button
+        class="back-project"
         (click)="backToProjects()">
           <i class="pi pi-arrow-left"></i>
-          Projetos
+          <span>
+            Projetos
+          </span>
         </button>
-        <br>
         <div>
-          <span *ngIf="editingProject === null">
-            {{project.name}}
-          </span>
-          <span *ngIf="editingProject !== null">
-            <input type="text" [(ngModel)]="editingProject.name">
-          </span>
-          <div *ngIf="editingProject === null && userIdValue === 'ADMIN'">
-            <button
-            (click)="startEditing(this.project)">
-              <i class="pi pi-pencil"></i>
-            </button>
-            <button
-            (click)="handleDeleteProject(project.id, project.name)">
-              <i class="pi pi-trash"></i>
-            </button>
-          </div>
-          <div *ngIf="editingProject !== null">
-            <button
-            (click)="handleSubmitEditProject()">
-              <i class="pi pi-check"></i>
-            </button>
-            <button
-            (click)="cancelEditing()">
-              <i class="pi pi-times"></i>
-            </button>
+          <div class="title-container">
+            <span *ngIf="editingProject === null">
+              {{project.name}}
+            </span>
+            <span *ngIf="editingProject !== null">
+              <input type="text" [(ngModel)]="editingProject.name" class="inp-project"/>
+            </span>
+            <div *ngIf="editingProject === null && userIdValue === 'ADMIN'">
+              <button
+              (click)="startEditing(this.project)">
+                <i class="pi pi-pencil"></i>
+              </button>
+              <button
+              (click)="handleDeleteProject(project.id, project.name)">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div *ngIf="editingProject !== null">
+              <button
+              class="btn-check"
+              (click)="handleSubmitEditProject()">
+                <i class="pi pi-check"></i>
+              </button>
+              <button
+              (click)="cancelEditing()">
+                <i class="pi pi-times"></i>
+              </button>
+            </div>
           </div>
         </div>
       </span>
@@ -46,22 +51,59 @@
           <span>Adicionar atividade</span>
       </button>
     </div>
-    <div *ngIf="editingProject === null">
-      descrição: {{project.description}}<br>
-      {{project.idResponsableUser.name}}<br>
-      {{formatDateRange(project.startDate, project.endDate)}}<br>
-      {{project.priority}}<br>
-      {{project.status}}
+    <div *ngIf="editingProject === null"
+    class="container-infos">
+    <div>
+      <div class="info-input">
+        <span>Responsável:</span>
+        <span style="padding: 0 10px;">
+          {{project.idResponsableUser.name}}
+        </span>
+      </div>
+      <div class="info-input">
+        <span>Período:</span>
+        <span style="padding: 0 10px;">
+          {{formatDateRange(project.startDate, project.endDate)}}
+        </span>
+      </div>
+        <div class="info-input">
+          <span>Prioridade:</span>
+          <span style="padding: 0 10px;">
+            {{project.priority}}
+          </span>
+        </div>
+        <div class="info-input">
+          <span>Status:</span>
+          <span style="padding: 0 10px;">
+            {{project.status}}
+          </span>
+        </div>
     </div>
-    <div *ngIf="editingProject !== null">
-      descrição: <input type="text" [(ngModel)]="editingProject.description"><br>
-      Responsável: <p-dropdown
-      [options]="usersDatas"
-      [(ngModel)]="editingProject.idResponsableUser.id"
-      optionLabel="name"
-      optionValue="id"
-      placeholder="Selecione um responsável"></p-dropdown> <br>
-      Data: <p-calendar
+
+    <div>
+      Descrição: <br>{{project.description}}
+    </div>
+    </div>
+
+    <div *ngIf="editingProject !== null"
+    class="container-infos">
+    <div>
+      <div>
+        <div class="info-input">
+          <span>Responsável:</span>
+          <span class="resiz-inputs">
+            <p-dropdown
+            [options]="usersDatas"
+            [(ngModel)]="editingProject.idResponsableUser.id"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Selecione um responsável"></p-dropdown>
+          </span>
+        </div>
+        <div class="info-input">
+          <span>Período:</span>
+          <span class="resiz-inputs">
+            <p-calendar
         placeholder="Dia"
         dateFormat="dd/mm/yy"
         [(ngModel)]="editingProject.startDate"
@@ -70,19 +112,36 @@
       placeholder="Dia"
       dateFormat="dd/mm/yy"
       [(ngModel)]="editingProject.endDate"
-      appendTo="body"></p-calendar><br>
-      Prioridade: <p-dropdown
-      [options]="projectPriorityOptions"
-      [(ngModel)]="editingProject.priority"
-      optionLabel="name"
-      optionValue="id"
-      placeholder="Selecione um responsável"></p-dropdown> <br>
-      Status: <p-dropdown
-      [options]="projectStatusOptions"
-      [(ngModel)]="editingProject.status"
-      optionLabel="name"
-      optionValue="id"
-      placeholder="Selecione um responsável"></p-dropdown>
+      appendTo="body"></p-calendar>
+          </span>
+        </div>
+          <div class="info-input">
+            <span>Prioridade:</span>
+            <span>
+              <p-dropdown
+              [options]="projectPriorityOptions"
+              [(ngModel)]="editingProject.priority"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Selecione um responsável"></p-dropdown>
+            </span>
+          </div>
+          <div class="info-input">
+            <span>Status:</span>
+            <span>
+              <p-dropdown
+              [options]="projectStatusOptions"
+              [(ngModel)]="editingProject.status"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Selecione um responsável"></p-dropdown>
+            </span>
+          </div>
+      </div>
+    </div>
+    <div>
+      Descrição:<br> <input pInputTextarea type="text" [(ngModel)]="editingProject.description" class="inp-desc">
+    </div>
     </div>
 
 

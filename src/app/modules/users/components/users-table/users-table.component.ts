@@ -60,4 +60,15 @@ export class UsersTableComponent {
         return 'profile'
     }
   }
+
+  getDeleted(deleted: boolean): string{
+    switch(deleted){
+      case true:
+        return 'user-deleted'
+      case false:
+        return 'user'
+      default:
+        return 'user'
+    }
+  }
 }

@@ -1,0 +1,51 @@
+::ng-deep{
+  .minimal-info-cards-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .minimal-info-card{
+    width: 21%;
+    height: 200px;
+    background-color: #ffffff22;
+    border-radius: 25px;
+    border: #ffffff55 1px solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .minimal-info-card > span{
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+  }
+  .minimal-info-card > span:last-child{
+    font-size: 50px;
+  }
+
+  .chart-bar-right{
+    width: 60%;
+    background-color: #ffffff22;
+    border: #ffffff55 1px solid;
+    border-radius: 25px;
+  }
+
+  .chart-donut-right{
+    width: 30%;
+    background-color: #ffffff22;
+    border: #ffffff55 1px solid;
+    border-radius: 25px;
+  }
+
+  .charts-container{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .insight-bg{
+    background-image: linear-gradient(#232323, #131313);
+  }
+}

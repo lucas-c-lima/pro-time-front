@@ -243,10 +243,8 @@ export class InsightInfosComponent implements OnInit{
   setActivitiesChartConfig(): void {
     if (this.filteredActivities.length > 0) {
       const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-      const textColorSecondary = documentStyle.getPropertyValue(
-        '--text-color-secondary'
-      );
+      const textColor = '#eee'
+      const textColorSecondary = '#eee'
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
       const incompleteCounts: Record<string, number> = this.filteredActivities.reduce((acc, activity) => {
@@ -266,7 +264,13 @@ export class InsightInfosComponent implements OnInit{
         datasets: [
           {
             label: 'Atividades por concluir',
-            backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+            backgroundColor: [
+              '#011f4b',
+              '#03396c',
+              '#005b96',
+              '#6497b1',
+              '#b3cde0'
+            ],
             borderColor: documentStyle.getPropertyValue('--indigo-400'),
             hoverBackgroundColor:
               documentStyle.getPropertyValue('--indigo-500'),
@@ -285,9 +289,12 @@ export class InsightInfosComponent implements OnInit{
             },
           },
           title: {
+            color: textColor,
             display: true,
-            text: 'Título do Gráfico',
-            align: 'start'
+            text: '     Tarefas a concluir (pro projeto)',
+            font: {
+              size: 20,
+            },
           }
         },
 
@@ -326,7 +333,7 @@ export class InsightInfosComponent implements OnInit{
   setActivitiesDonutChartConfig(): void {
     if (this.filteredActivities.length > 0) {
       const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColor = '#eee';
       const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
@@ -345,11 +352,12 @@ export class InsightInfosComponent implements OnInit{
           {
             label: 'Atividades por Status',
             backgroundColor: [
-              documentStyle.getPropertyValue('--indigo-400'),
-              documentStyle.getPropertyValue('--green-400'),
-              documentStyle.getPropertyValue('--red-400'),
-              documentStyle.getPropertyValue('--orange-400'),
+              '#7a5c8d',
+              "#d6a7df",
+              '#9d74b0',
+              '#c7a3d4',
             ],
+            borderColor: 'transparent',
             data: counts,
           },
         ],
@@ -365,7 +373,7 @@ export class InsightInfosComponent implements OnInit{
           },
           title: {
             display: true,
-            text: 'Atividades Totais por Status de Conclusão', // Título do gráfico
+            text: 'Atividades Totais por Status de Conclusão',
             color: textColor,
             font: {
               size: 20,
@@ -378,31 +386,27 @@ export class InsightInfosComponent implements OnInit{
 
   setHoursLineChartConfig(): void {
     const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColor = '#eee';
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     const hoursByUser: Record<string, number> = {};
 
-    // Calcular horas totais por usuário
     this.filteredHours.forEach(entry => {
       const userName = entry.idUsers.name;
-      const startDate = this.convertToISO(entry.startDate); // Data de início
-      const endDate = this.convertToISO(entry.endDate); // Data de fim
+      const startDate = this.convertToISO(entry.startDate);
+      const endDate = this.convertToISO(entry.endDate);
 
-      // Calcular horas trabalhadas
-      const hoursWorked = (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60); // Conversão para horas
+      const hoursWorked = (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60);
 
-      // Somar as horas ao usuário correspondente
       if (!hoursByUser[userName]) {
         hoursByUser[userName] = 0;
       }
-      hoursByUser[userName] += hoursWorked; // Soma total de horas
+      hoursByUser[userName] += hoursWorked;
     });
 
-    // Criar dados para o gráfico
-    const labels = Object.keys(hoursByUser); // Usuários como labels
-    const data = Object.values(hoursByUser); // Horas totais como dados
+    const labels = Object.keys(hoursByUser);
+    const data = Object.values(hoursByUser);
 
     this.hoursLineChartDatas = {
       labels: labels,
@@ -411,7 +415,13 @@ export class InsightInfosComponent implements OnInit{
           label: 'Horas Totais Lançadas',
           data: data,
           fill: true,
-          backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+          backgroundColor: [
+            '#ffffb7',
+            '#fff192',
+            '#ffea61',
+            '#ffdd3c',
+            '#ffd400'
+          ],
           tension: 0.1,
         },
       ],
@@ -465,7 +475,7 @@ export class InsightInfosComponent implements OnInit{
   setProjectsDonutChartConfig(): void {
     if (this.filteredProjects.length > 0) {
       const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColor = '#eee';
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
       // Contagem de projetos por status
@@ -483,11 +493,12 @@ export class InsightInfosComponent implements OnInit{
           {
             label: 'Projetos por Status',
             backgroundColor: [
-              documentStyle.getPropertyValue('--indigo-400'),
-              documentStyle.getPropertyValue('--green-400'),
-              documentStyle.getPropertyValue('--red-400'),
-              documentStyle.getPropertyValue('--orange-400'),
+              '#216968',
+              '#27847a',
+              '#499f78',
+              '#80cc72',
             ],
+            borderColor: 'transparent',
             data: counts,
           },
         ],

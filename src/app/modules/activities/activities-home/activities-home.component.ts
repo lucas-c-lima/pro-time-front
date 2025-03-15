@@ -8,6 +8,7 @@ import { EventAction } from 'src/app/models/interface/activities/event/EventActi
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ActivitiesDataTransferService } from 'src/app/shared/services/activities/activities-data-transfer.service';
 import { ActivityFormComponent } from '../components/activity-form/activity-form.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-activities-home',
@@ -19,13 +20,17 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
   private ref!: DynamicDialogRef;
   public activitiesDatas: Array<GetAllActivitiesResponse> = [];
 
+  userIdValue :string = this.cookie.get('USER_PROFILE');
+  userId :string = this.cookie.get('USER_ID');
+
   constructor(
     private activitiesService: ActivitiesService,
     private activitiesDtService: ActivitiesDataTransferService,
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private cookie: CookieService
   ){}
 
   ngOnInit(): void {
@@ -43,26 +48,49 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
   }
 
   getAPIActivitiesDatas() {
-    this.activitiesService
-    .getAllActivities()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (response) => {
-        if (response.length > 0){
-          this.activitiesDatas = response
+    if(this.userIdValue === 'ADMIN'){
+      this.activitiesService
+      .getAllActivities()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if (response.length > 0){
+            this.activitiesDatas = response
+          }
+        },
+        error: (err) => {
+          console.log(err)
+          this.messageService.add({
+            severity: 'Error',
+            summary: 'Erro',
+            detail: 'Erro ao acessar a Atividades',
+            life: 2500,
+          })
+          this.router.navigate(['/dashboard'])
         }
-      },
-      error: (err) => {
-        console.log(err)
-        this.messageService.add({
-          severity: 'Error',
-          summary: 'Erro',
-          detail: 'Erro ao acessar a Atividades',
-          life: 2500,
-        })
-        this.router.navigate(['/dashboard'])
-      }
-    })
+      })
+    } else {
+      this.activitiesService
+      .getActivitiesByUser(Number(this.userId))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if (response.length > 0){
+            this.activitiesDatas = response
+          }
+        },
+        error: (err) => {
+          console.log(err)
+          this.messageService.add({
+            severity: 'Error',
+            summary: 'Erro',
+            detail: 'Erro ao acessar a Atividades',
+            life: 2500,
+          })
+          this.router.navigate(['/dashboard'])
+        }
+      })
+    }
   }
 
   handleActivityAction(event: EventAction): void{

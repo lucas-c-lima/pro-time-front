@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Subject, take, takeUntil } from 'rxjs';
@@ -33,6 +34,7 @@ import { ActivitiesDataTransferService } from 'src/app/shared/services/activitie
 })
 export class ProjectFormComponent {
   private readonly destroy$: Subject<void> = new Subject();
+  userProfileValue: string = this.cookie.get("USER_PROFILE")
 
   public projectDatas: Array<GetAllProjectsResponse> = [];
     public selectedProject: Array<{name: string; code: string}> = [];
@@ -119,7 +121,8 @@ export class ProjectFormComponent {
       private messageService: MessageService,
       private router: Router,
       private datePipe: DatePipe,
-      public ref: DynamicDialogConfig
+      public ref: DynamicDialogConfig,
+      public cookie: CookieService
     ){}
 
     ngOnInit(): void {

@@ -1,14 +1,17 @@
-<div class="container-card" >
+<div class="container-card insight-bg" >
   <p-card class="card-content">
     <div class="header-container">
       <span class="header-title">Relatórios</span>
-    </div>
-    <div class="filters-container">
-      <p-dropdown
-      [options]="timePeriod"
-      [(ngModel)]="selectedFilter"
-      (onChange)="onFilterChange()"
-      ></p-dropdown>
+      <div class="filters-container">
+        <div style="text-align: right;">
+          Periodo
+        </div>
+        <p-dropdown
+        [options]="timePeriod"
+        [(ngModel)]="selectedFilter"
+        (onChange)="onFilterChange()"
+        ></p-dropdown>
+      </div>
     </div>
     <div class="minimal-info-cards-container">
       <div class="minimal-info-card">
@@ -28,26 +31,30 @@
         <span>{{ filteredNumber }}</span>
       </div>
     </div>
-    <div>
+    <div class="charts-container">
       <p-chart
         type="bar"
         [data]="activitiesChartDatas"
         [options]="activitiesChartOptions"
+        class="chart-bar-right"
       ></p-chart>
       <p-chart
       type="doughnut"
       [data]="activitiesDonutChartDatas"
-      [options]="activitiesDonutChartOptions"></p-chart>
+      [options]="activitiesDonutChartOptions"
+      class="chart-donut-right"></p-chart>
     </div>
-    <div style="height: 200px;">
+    <div class="charts-container">
       <p-chart
       type="bar"
       [data]="hoursLineChartDatas"
-      [options]="hoursLineChartOptions"></p-chart>
+      [options]="hoursLineChartOptions"
+      class="chart-bar-right"></p-chart>
       <p-chart
       type="doughnut"
       [data]="projectsDonutChartDatas"
-      [options]="projectsDonutChartOptions"></p-chart>
+      [options]="projectsDonutChartOptions"
+      class="chart-donut-right"></p-chart>
     </div>
 
   </p-card>

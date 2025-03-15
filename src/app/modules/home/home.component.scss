@@ -23,12 +23,15 @@
   }
   .container-logo{
     width: 100%;
-    height: 75px;
+    height: 200px;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff22;
+  }
+  .container-logo > img {
+    height: 100%;
+    margin-right: 15px;
   }
   .container-slogan{
     width: 100%;

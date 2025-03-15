@@ -45,7 +45,7 @@
       <!-- Descrição -->
       <input pInputTextarea placeholder="Descrição" formControlName="description">
 
-      <div class="flex flex-row justify-content-center align-items-center m-1">
+      <div class="flex flex-row justify-content-center align-items-center m-1" *ngIf="userProfileValue === 'ADMIN'">
         <p-button
         [disabled]="!addActivityForm.valid"
         type="submit"
@@ -113,6 +113,7 @@
         class="submit-activity"
         [disabled]="!editActivityForm.valid"
         type="submit"
+        *ngIf="userProfileValue === 'ADMIN'"
         >Concluir</button>
       </div>
     </div>
@@ -138,9 +139,9 @@
         dateFormat="dd/mm/yy"
         formControlName="entryDay"
         appendTo="body"></p-calendar>
+        <br>
     Hora inicio
-    <input type="time" formControlName='startHour'>
-    <br>
+    <input type="time" formControlName='startHour' style="margin: 5px 0;">
     Hora fim
     <input type="time" formControlName='endHour'>
     <br>

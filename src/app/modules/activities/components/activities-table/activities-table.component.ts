@@ -18,6 +18,7 @@ export class ActivitiesTableComponent {
   @Output() deleteActivityEvent = new EventEmitter<DeleteActivityAction>();
 
   userIdValue :string = this.cookie.get('USER_PROFILE');
+  userId :string = this.cookie.get('USER_ID');
 
   public activitySelected!: GetAllActivitiesResponse;
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
@@ -30,9 +31,15 @@ export class ActivitiesTableComponent {
   }
 
   loadActivities(): void {
-    this.activitiesService.getAllActivities().subscribe((activities) => {
-      this.activities = activities;
-    });
+    if(this.userIdValue === 'ADMIN'){
+      this.activitiesService.getAllActivities().subscribe((activities) => {
+        this.activities = activities
+      })
+    } else {
+      this.activitiesService.getActivitiesByUser(Number(this.userId)).subscribe((activities) => {
+        this.activities = activities;
+      });
+    }
   }
 
   formatDateRange(startDate: string, endDate: string): string {

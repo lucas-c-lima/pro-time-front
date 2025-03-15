@@ -113,6 +113,7 @@
         class="submit-activity"
         [disabled]="!editActivityForm.valid"
         type="submit"
+        *ngIf="userProfileValue === 'ADMIN'"
         >Concluir</button>
       </div>
     </div>
