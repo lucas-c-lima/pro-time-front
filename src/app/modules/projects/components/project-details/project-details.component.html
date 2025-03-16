@@ -68,14 +68,14 @@
       </div>
         <div class="info-input">
           <span>Prioridade:</span>
-          <span style="padding: 0 10px;">
-            {{project.priority}}
+          <span style="padding: 0 10px; text-transform: capitalize;">
+            {{formatStatus(project.priority)}}
           </span>
         </div>
         <div class="info-input">
           <span>Status:</span>
-          <span style="padding: 0 10px;">
-            {{project.status}}
+          <span style="padding: 0 10px; text-transform: capitalize;">
+            {{formatStatus(project.status)}}
           </span>
         </div>
     </div>
