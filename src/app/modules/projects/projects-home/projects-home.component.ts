@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
@@ -39,7 +39,13 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
     private dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private cookie: CookieService
-  ){}
+  ){
+    router.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+          if (event instanceof NavigationEnd) {
+            this.adminRoute = event.url
+          }
+        });
+  }
 
   ngOnInit(): void {
     this.getServiceProjectsDatas();
