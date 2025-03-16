@@ -49,7 +49,7 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
   }
 
   getAPIActivitiesDatas() {
-    if(this.userIdValue === 'ADMIN' && this.adminRoute == '/admin/insights'){
+    if(this.userIdValue == 'ADMIN' && this.adminRoute == '/admin/activities'){
       this.activitiesService
       .getAllActivities()
       .pipe(takeUntil(this.destroy$))

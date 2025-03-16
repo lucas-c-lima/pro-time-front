@@ -127,6 +127,7 @@
       <ng-template pTemplate="body" let-activity>
         <tr
         class="table-body"
+        [ngClass]="getDeleted(activity?.deleted)"
         (click)="handleActivityEvent(editActivityEvent, activity?.id)">
           <td class="truncate">
             <div class="activity-container">
@@ -136,7 +137,7 @@
                   [ngClass]="getIconClass(activity?.status)"
                   (click)="activity?.status !== 'CONCLUIDA' && handleActivityEvent(hoursActivityAction,activity?.id); $event.stopPropagation()"></i>
                 </button>
-                <span [ngStyle]="{'text-decoration': activity?.deleted ? 'line-through' : 'none'}">
+                <span>
                   {{activity?.name}}
                 </span>
               </div>

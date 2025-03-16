@@ -107,7 +107,6 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.activityAction = this.ref.data;
-
     if(
       this.activityAction?.event?.action === this.editActivityAction &&
       this.activityAction?.activitiesDatas
@@ -452,8 +451,6 @@ export class ActivityFormComponent implements OnInit, OnDestroy{
     const day = start.getDate().toString().padStart(2, '0');
     const month = (start.getMonth() + 1).toString().padStart(2, '0');
     const year = start.getFullYear();
-
-    console.log()
 
     const startHour = start.getHours().toString().padStart(2, '0');
     const startMinute = start.getMinutes().toString().padStart(2, '0');

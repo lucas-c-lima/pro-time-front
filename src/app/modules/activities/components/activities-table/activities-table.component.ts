@@ -94,6 +94,17 @@ export class ActivitiesTableComponent {
     }
   }
 
+  getDeleted(deleted: boolean): string{
+    switch(deleted){
+      case true:
+        return 'activity-deleted'
+      case false:
+        return 'activity'
+      default:
+        return 'activity'
+    }
+  }
+
   getIconClass(status: string):string {
     return status === 'CONCLUIDA' ? 'activity-mark activity-disabled' : 'activity-mark';
   }
