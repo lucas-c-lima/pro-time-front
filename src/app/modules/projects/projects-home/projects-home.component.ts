@@ -11,6 +11,7 @@ import { ActivityFormComponent } from '../../activities/components/activity-form
 import { GetAllActivitiesResponse } from 'src/app/models/interface/activities/response/GetAllActivitiesResponse';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { ProjectFormComponent } from '../components/project-form/project-form.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-projects-home',
@@ -25,7 +26,9 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
   private ref!: DynamicDialogRef;
   public activitiesDatas: Array<GetAllActivitiesResponse> = [];
 
-
+  userIdValue :string = this.cookie.get('USER_PROFILE');
+  userId :string = this.cookie.get('USER_ID');
+  private adminRoute = ''
 
   constructor(
     private projectsService: ProjectsService,
@@ -34,7 +37,8 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
     private router: Router,
     private messageService: MessageService,
     private dialogService: DialogService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private cookie: CookieService
   ){}
 
   ngOnInit(): void {
@@ -42,37 +46,54 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
   }
 
   getServiceProjectsDatas() {
-    const projectsLoaded = this.projectsDtService.getProjectsDatas();
-
-    if(projectsLoaded.length > 0){
-      this.projectsDatas = projectsLoaded;
-    } else {
       this.getAPIProjectsDatas();
       this.getAPIActivitiesDatas()
-    }
   }
 
   getAPIProjectsDatas() {
-    this.projectsService
-    .getAllProjects()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (response) => {
-        if(response.length > 0){
-          this.projectsDatas = response
+    if(this.userIdValue === 'ADMIN' && this.adminRoute == '/admin/projects'){
+      this.projectsService
+      .getAllProjects()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if(response.length > 0){
+            this.projectsDatas = response
+          }
+        },
+        error: (err) => {
+          console.log(err)
+          this.messageService.add({
+            severity:'Error',
+            summary: 'Erro',
+            detail: 'Erro ao acessar a Projetos',
+            life: 2500,
+          })
+          this.router.navigate(['/dashboard'])
         }
-      },
-      error: (err) => {
-        console.log(err)
-        this.messageService.add({
-          severity:'Error',
-          summary: 'Erro',
-          detail: 'Erro ao acessar a Projetos',
-          life: 2500,
-        })
-        this.router.navigate(['/dashboard'])
-      }
-    })
+      })
+    } else {
+      this.projectsService
+      .getProjectsByUser(Number(this.userId))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if(response.length > 0){
+            this.projectsDatas = response
+          }
+        },
+        error: (err) => {
+          console.log(err)
+          this.messageService.add({
+            severity: 'Error',
+            summary: 'Erro',
+            detail: 'Erro ao acessar a Projetos',
+            life: 2500,
+          })
+          this.router.navigate(['/dashboard'])
+        }
+      })
+    }
   }
 
   getAPIActivitiesDatas() {
