@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
@@ -22,6 +22,7 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
 
   userIdValue :string = this.cookie.get('USER_PROFILE');
   userId :string = this.cookie.get('USER_ID');
+  private adminRoute = ''
 
   constructor(
     private activitiesService: ActivitiesService,
@@ -31,24 +32,24 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private cookie: CookieService
-  ){}
+  ){
+    router.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.adminRoute = event.url
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.getServiceActivitiesDatas();
   }
 
   getServiceActivitiesDatas(){
-    const activitiesLoaded = this.activitiesDtService.getActivitiesDatas();
-
-    if(activitiesLoaded.length > 0){
-      this.activitiesDatas = activitiesLoaded;
-    } else {
-      this.getAPIActivitiesDatas();
-    }
+    this.getAPIActivitiesDatas();
   }
 
   getAPIActivitiesDatas() {
-    if(this.userIdValue === 'ADMIN'){
+    if(this.userIdValue === 'ADMIN' && this.adminRoute == '/admin/insights'){
       this.activitiesService
       .getAllActivities()
       .pipe(takeUntil(this.destroy$))

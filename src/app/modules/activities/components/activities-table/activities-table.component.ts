@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subject, takeUntil } from 'rxjs';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
 import { DeleteActivityAction } from 'src/app/models/interface/activities/event/DeleteActivityAction';
 import { EventAction } from 'src/app/models/interface/activities/event/EventAction';
@@ -13,25 +15,37 @@ import { ActivitiesService } from 'src/app/services/activities/activities.servic
   styleUrls: ['./activities-table.component.scss']
 })
 export class ActivitiesTableComponent {
+  private readonly destroy$: Subject<void> = new Subject();
+
   @Input() activities: Array<GetAllActivitiesResponse> = []
   @Output() activityEvent = new EventEmitter<EventAction>();
   @Output() deleteActivityEvent = new EventEmitter<DeleteActivityAction>();
 
   userIdValue :string = this.cookie.get('USER_PROFILE');
   userId :string = this.cookie.get('USER_ID');
+  private adminRoute = ''
 
   public activitySelected!: GetAllActivitiesResponse;
   public addActivityEvent = ActivityEvent.ADD_ACTIVITY_EVENT;
   public editActivityEvent = ActivityEvent.EDIT_ACTIVITY_EVENT;
   public hoursActivityAction = ActivityEvent.HOURS_ACTIVITY_EVENT;
-  constructor(private activitiesService: ActivitiesService, private cookie: CookieService) {}
+  constructor(
+    private activitiesService: ActivitiesService,
+    private cookie: CookieService,
+    private route: Router) {
+      route.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+            if (event instanceof NavigationEnd) {
+              this.adminRoute = event.url
+            }
+          });
+    }
 
   ngOnInit(): void {
     this.loadActivities();
   }
 
   loadActivities(): void {
-    if(this.userIdValue === 'ADMIN'){
+    if(this.userIdValue === 'ADMIN' && this.adminRoute == '/admin/activities'){
       this.activitiesService.getAllActivities().subscribe((activities) => {
         this.activities = activities
       })
