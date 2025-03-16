@@ -121,8 +121,16 @@
           </div>
         </td>
         <td class="truncate-text">{{project.idResponsableUser?.name}}</td>
-        <td class="truncate-text">{{project.priority}}</td>
-        <td class="truncate-text">{{project.status}}</td>
+        <td class="truncate-text" >
+          <div [ngClass]="getPriorityClass(project.priority)">
+            {{formatStatus(project.priority)}}
+          </div>
+        </td>
+        <td class="truncate-text">
+          <div [ngClass]="getStatusClass(project.status)">
+            {{formatStatus(project.status)}}
+          </div>
+        </td>
       </tr>
     </ng-template>
     </p-table>

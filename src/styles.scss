@@ -414,7 +414,7 @@ th, tr,
     opacity: .2;
   }
 
-  .status{
+  .status, .priority{
     text-transform: capitalize;
     padding: 5px;
     margin: -5px;
@@ -424,7 +424,7 @@ th, tr,
     font-weight: 600;
   }
   .status-aberta{
-    background-color: #2ecfc7;
+    background-color: #4ad1ca;
   }
   .status-em-andamento{
     background-color: #fdd348;
@@ -435,6 +435,16 @@ th, tr,
   .status-pausada{
     background-color: #fa5454;
   }
+  .low-priority{
+    background-color: #39e2bd;
+  }
+  .medium-priority{
+    background-color: #f0a83d;
+  }
+  .high-priority{
+    background-color: #dd6da5;
+  }
+
 
   .back-project{
     background-color: transparent;

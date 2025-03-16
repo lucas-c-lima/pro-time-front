@@ -91,7 +91,37 @@ userIdValue :string = this.cookie.get('USER_PROFILE');
       this.projectSelected.emit(project);
   }
 
+  formatStatus(status: string): string{
+    return status.replace(/_/g, ' ').toLowerCase();
+  }
 
+  getPriorityClass(priority: string): string {
+    switch (priority) {
+      case 'ALTA':
+        return 'priority high-priority';
+      case 'MEDIA':
+        return 'priority medium-priority';
+      case 'BAIXA':
+        return 'priority low-priority';
+      default:
+        return 'priority';
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'PLANEJADO':
+        return 'status status-aberta';
+      case 'EM_ANDAMENTO':
+        return 'status status-em-andamento';
+      case 'CONCLUIDO':
+        return 'status status-concluida';
+      case 'CANCELADO':
+        return 'status status-pausada';
+      default:
+        return 'status';
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
