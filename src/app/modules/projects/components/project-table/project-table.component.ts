@@ -69,7 +69,6 @@ userIdValue :string = this.cookie.get('USER_PROFILE');
   handleNewProject(): void {
       this.ref = this.dialogService.open(ProjectFormComponent,{
         header: "Adicionar projeto",
-        width: '70%',
         contentStyle: { overflow: 'auto'},
         baseZIndex: 10000,
         data: {

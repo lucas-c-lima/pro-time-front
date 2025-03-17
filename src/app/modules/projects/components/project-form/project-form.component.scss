@@ -1,0 +1,14 @@
+::ng-deep{
+  .p-dropdown, .p-inputtext {
+    background-color: #333;
+    border-color: #444;
+    color: white;
+    border: 1px solid #555;
+  }
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content,
+  .p-dialog .p-dialog-footer{
+    background-color: #222;
+    color: white;
+  }
+}

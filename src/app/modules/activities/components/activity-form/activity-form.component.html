@@ -60,53 +60,74 @@
   <form [formGroup]="editActivityForm" (ngSubmit)="handleSubmitEditActivity()">
     <div class="card flex flex-column md:flex-column gap-3">
       <!-- Nome -->
-      <input pInputText placeholder="Nome" formControlName="name">
+      <div class="form-inputs-container">
+        <span>Nome da atividade:</span>
+        <input pInputText placeholder="Nome" formControlName="name">
+      </div>
       <!-- Responsável -->
-      <p-dropdown
-      styleClass="w-full"
-      [options]="usersDatas"
-      [(ngModel)]="this.activitySelectedDatas.idResponsableUser.id"
-      optionLabel="name"
-      optionValue="id"
-      placeholder="Selecione um responsável"
-      formControlName="responsableUser"></p-dropdown>
-      <!-- Projeto -->
-      <p-dropdown
-      styleClass="w-full"
-      [options]="projectDatas"
-      [(ngModel)]="this.activitySelectedDatas.projectId.id"
-      optionLabel="name"
-      optionValue="id"
-      placeholder="Selecione um projeto"
-      formControlName="project"></p-dropdown>
-      <div class="flex flex-row gap-3">
-        <!-- Data de inicio -->
-        <p-calendar
-        styleClass="custom-calendar"
-        formControlName="startDate"
-        placeholder="Selecione uma data de inicio"
-        dateFormat="dd/mm/yy"
-        [minDate]="minDate"
-        appendTo="body"></p-calendar>
-        <!-- Data de conclusão -->
-        <p-calendar
-        styleClass="custom-calendar"
-        formControlName="endDate"
-        placeholder="Selecione uma data limite"
-        dateFormat="dd/mm/yy"
-        [minDate]="minDate"
-        appendTo="body"></p-calendar>
-        <!-- Status -->
+      <div class="form-inputs-container">
+        <span>Responsável:</span>
         <p-dropdown
-        [options]="statusOptions"
+        styleClass="w-full"
+        [options]="usersDatas"
+        [(ngModel)]="this.activitySelectedDatas.idResponsableUser.id"
         optionLabel="name"
-        optionValue="name"
-        placeholder="Selecione o status"
-        formControlName="status"></p-dropdown>
+        optionValue="id"
+        placeholder="Selecione um responsável"
+        formControlName="responsableUser"></p-dropdown>
+      </div>
+      <!-- Projeto -->
+      <div class="form-inputs-container">
+        <span>Projeto:</span>
+        <p-dropdown
+        styleClass="w-full"
+        [options]="projectDatas"
+        [(ngModel)]="this.activitySelectedDatas.projectId.id"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Selecione um projeto"
+        formControlName="project"></p-dropdown>
+      </div>
+      <div class="flex flex-row gap-3 justify-content-between">
+        <!-- Data de inicio -->
+        <div class="form-inputs-container">
+          <span>Data de início:</span>
+          <p-calendar
+          styleClass="custom-calendar"
+          formControlName="startDate"
+          placeholder="Selecione uma data de inicio"
+          dateFormat="dd/mm/yy"
+          [minDate]="minDate"
+          appendTo="body"></p-calendar>
+        </div>
+        <!-- Data de conclusão -->
+        <div class="form-inputs-container">
+          <span>Data de término</span>
+          <p-calendar
+          styleClass="custom-calendar"
+          formControlName="endDate"
+          placeholder="Selecione uma data limite"
+          dateFormat="dd/mm/yy"
+          [minDate]="minDate"
+          appendTo="body"></p-calendar>
+        </div>
+        <!-- Status -->
+        <div class="form-inputs-container">
+          <span>Status:</span>
+          <p-dropdown
+          [options]="statusOptions"
+          optionLabel="name"
+          optionValue="name"
+          placeholder="Selecione o status"
+          formControlName="status"></p-dropdown>
+        </div>
       </div>
 
-      <input pInputTextarea placeholder="Descrição" formControlName="description">
-
+      <!-- Descrição -->
+      <div class="form-inputs-container">
+        <span>Descrição:</span>
+        <input pInputTextarea placeholder="Descrição" formControlName="description">
+      </div>
       <div class="flex flex-row justify-content-between align-items-center m-1">
 
         <button

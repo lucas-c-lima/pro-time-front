@@ -98,7 +98,6 @@ export class ActivitiesHomeComponent implements OnInit, OnDestroy{
     if (event){
       this.ref = this.dialogService.open(ActivityFormComponent,{
         header: event?.action,
-        width: '70%',
         contentStyle: { overflow: 'auto'},
         baseZIndex: 10000,
         data: {

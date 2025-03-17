@@ -37,7 +37,8 @@
   }
 
   .p-dialog .p-dialog-header,
-  .p-dialog .p-dialog-content{
+  .p-dialog .p-dialog-content,
+  .p-dialog .p-dialog-footer{
     background-color: #222;
     color: white;
   }
@@ -63,7 +64,6 @@
   }
   .input-time, .input-description{
     border-radius: 6px;
-    border: none;
     font-size: 1rem;
   }
   .input-description{
@@ -78,4 +78,18 @@
     height: 40px;
   }
 
+  .form-inputs-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .form-inputs-container span{
+    font-size: 18px;
+  }
+
+  .p-inputtext, .p-dropdown {
+    background-color: #333;
+    border-color: #444;
+    color: white;
+    border: 1px solid #555;
+  }
 }

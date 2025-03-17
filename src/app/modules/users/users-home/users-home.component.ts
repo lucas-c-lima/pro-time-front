@@ -69,7 +69,6 @@ export class UsersHomeComponent implements OnInit, OnDestroy{
     if(event){
       this.ref = this.dialogService.open(UsersFormComponent,{
         header: event?.action,
-        width: '70%',
         contentStyle: {overflow: 'auto'},
         baseZIndex:10000,
         data: {

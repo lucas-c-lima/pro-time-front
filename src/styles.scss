@@ -557,3 +557,37 @@ th, tr,
   .drp-project > .p-inputtext{
     padding: 0 !important;
   }
+
+  .form-inputs-container .p-inputtext,
+  .form-inputs-container .p-dropdown,
+  .form-inputs-container .p-dropdown-label,
+  .inputs-container-entry .p-calendar .p-inputtext,
+  .input-time, .input-description{
+    background-color: #333;
+    border-color: #444;
+    color: white;
+    border: 1px solid #555;
+  }
+
+  .form-inputs-container input:enabled:focus,
+  .form-inputs-container input:enabled:hover,
+  .form-inputs-container .p-dropdown:not(.p-disabled):hover{
+    box-shadow: 0 0 2px 0px #999;;
+    border-color: #999;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
+    background-color: #333 !important;
+    color: #eee !important;
+  }
+
+  .p-datepicker:not(.p-datepicker-inline) tr,
+  .p-datepicker:not(.p-datepicker-inline) th{
+    color: #111;
+  }
+  .p-datepicker:not(.p-datepicker-inline) td > span.p-highlight{
+    color: #eee !important;
+    background-color: #333;
+  }
+
+
