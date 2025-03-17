@@ -193,6 +193,7 @@ export class ProjectsHomeComponent implements OnInit, OnDestroy{
   onProjectSelected(project: GetAllProjectsResponse){
     this.selectedProject = project
   }
+
   public reload: string = ''
   toReload(value: string): void{
     this.reload = value;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivityEvent } from 'src/app/models/enums/activities/ActivityEvent';
@@ -18,13 +18,16 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./project-table.component.scss']
 })
 export class ProjectTableComponent {
-private readonly destroy$: Subject<void> = new Subject();
+  private readonly destroy$: Subject<void> = new Subject();
 
-userIdValue :string = this.cookie.get('USER_PROFILE');
 
   @Input() projects: Array<GetAllProjectsResponse> = [];
   @Output() projectSelected = new EventEmitter<GetAllProjectsResponse>();
   @Output() projectEvent = new EventEmitter<EventAction>();
+
+  userIdValue :string = this.cookie.get('USER_PROFILE');
+  userId :string = this.cookie.get('USER_ID');
+  private adminRoute = ''
 
   public projectSelect!: GetAllProjectsResponse;
   public addProjectEvent = ProjectEvent.ADD_PROJECT_EVENT
@@ -43,8 +46,17 @@ userIdValue :string = this.cookie.get('USER_PROFILE');
     private projectsService: ProjectsService,
     private activitiesService: ActivitiesService,
     private dialogService: DialogService,
-    private cookie: CookieService
-  ){}
+    private cookie: CookieService,
+    private routeAdm: Router
+  ){
+  this.adminRoute = routeAdm.url;
+
+  routeAdm.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      this.adminRoute = event.url;
+    }
+  });
+  }
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('id');
@@ -79,9 +91,15 @@ userIdValue :string = this.cookie.get('USER_PROFILE');
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.projectsService.getAllProjects().subscribe((projects) => {
-            this.projects = projects;
-          });
+          if(this.userIdValue === 'ADMIN' && this.adminRoute == '/admin/projects'){
+            this.projectsService.getAllProjects().subscribe((projects) => {
+              this.projects = projects;
+            });
+          } else {
+            this.projectsService.getProjectsByUser(Number(this.userId)).subscribe((projects) => {
+              this.projects = projects;
+            });
+          }
         },
       })
   }
