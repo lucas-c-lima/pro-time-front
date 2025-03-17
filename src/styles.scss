@@ -480,7 +480,7 @@ th, tr,
     display: flex;
     gap: 15px;
   }
-  .title-container button{
+  .title-container button, .btn-container-entry button{
     width: 30px;
     height: 30px;
     border-radius: 100%;
@@ -493,15 +493,15 @@ th, tr,
     transition: .2s;
     cursor: pointer;
   }
-  .title-container button:last-child{
+  .title-container button:last-child, .btn-container-entry button:last-child{
     border-color: #fa5454;
     color: #fa5454
   }
-  .title-container .btn-check{
+  .title-container .btn-check, .btn-container-entry .btn-check{
     border-color: #40ca8a;
     color: #40ca8a
   }
-  .title-container button:hover{
+  .title-container button:hover, .btn-container-entry button:hover{
     opacity: 1;
   }
   .container-infos{

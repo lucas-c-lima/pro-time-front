@@ -124,31 +124,45 @@
 
 <!-- FORMULÁRIO REGISTRAR HORAS -->
 <div *ngIf="activityAction?.event?.action === hoursActivityAction">
-  <div>Atividade: {{this.activitySelectedDatas.name}}</div>
-  <div>Responsável: {{this.activitySelectedDatas.idResponsableUser.name}}</div>
+  <div class="title-entry">
+    <span>Atividade: {{this.activitySelectedDatas.name}}</span>
+
+  </div>
+  <!-- <div>Responsável: {{this.activitySelectedDatas.idResponsableUser.name}}</div>
   <div>Projeto: {{this.activitySelectedDatas.projectId.name}}</div>
   <div>Período: {{formatDateEntry(this.activitySelectedDatas.startDate, this.activitySelectedDatas.endDate)}}</div>
-  <div>Status: {{this.activitySelectedDatas.status}}</div>
+  <div>Status: {{this.activitySelectedDatas.status}}</div> -->
 
   <form
   [formGroup]="hoursActivityForm"
   (ngSubmit)="handleSubmitHoursActivity()">
-    Dia inicio
-    <p-calendar
-        placeholder="Dia"
-        dateFormat="dd/mm/yy"
-        formControlName="entryDay"
-        appendTo="body"></p-calendar>
-        <br>
-    Hora inicio
-    <input type="time" formControlName='startHour' style="margin: 5px 0;">
-    Hora fim
-    <input type="time" formControlName='endHour'>
-    <br>
-    Descrição
-    <input type="text" formControlName="description">
+    <div class="inputs-container-entry">
+      <div style="display: flex; flex-direction: column;">
+        Dia inicio
+        <p-calendar
+            placeholder="Dia"
+            dateFormat="dd/mm/yy"
+            formControlName="entryDay"
+            appendTo="body"></p-calendar>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        Hora inicio
+        <input type="time" formControlName='startHour' class="input-time">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        Hora fim
+        <input type="time" formControlName='endHour' class="input-time">
+      </div>
+    </div>
 
-    <div class="flex flex-row justify-content-between align-items-center m-1">
+    <div class="inputs-container-entry" style="margin-top: 1rem;">
+      <div style="display: flex; flex-direction: column;">
+        Descrição
+        <input type="text" formControlName="description" class="input-description">
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-content-between align-items-center" style="margin: 1rem 0;">
       <button
       class="submit-activity"
       [disabled]="!hoursActivityForm.valid"
@@ -180,7 +194,7 @@
           <td>{{calculateHours(entry.startDate, entry.endDate)}} Hora(s)</td>
           <td>{{formatDateTimeRangeHours(entry.startDate, entry.endDate)}}</td>
           <td>{{entry.registerDate}}</td>
-          <td>
+          <td class="btn-container-entry">
             <button pTooltip="Editar registro" tooltipPosition="top" (click)="startEditing(entry)">
               <i class="pi pi-pencil"></i>
             </button>
@@ -191,22 +205,22 @@
         </tr>
         <tr *ngIf="editingEntry?.id === entry.id">
           <td>{{entry.idUsers.name}}</td>
-          <td><input type="text" [(ngModel)]="editingEntry.description"></td>
+          <td><input type="text" [(ngModel)]="editingEntry.description" class="input-description" style="width: 16rem;"></td>
           <td>- Hora(s)</td>
-          <td>
+          <td class="inputs-container-edit-entry">
             <p-calendar
               placeholder="Dia"
               dateFormat="dd/mm/yy"
               [(ngModel)]="editingEntry.startDate"
               appendTo="body"></p-calendar>
               -
-            <input type="time" [(ngModel)]="editingEntry.startHour">
+            <input type="time" [(ngModel)]="editingEntry.startHour" class="input-time">
             às
-            <input type="time" [(ngModel)]="editingEntry.endHour">
+            <input type="time" [(ngModel)]="editingEntry.endHour" class="input-time">
           </td>
           <td>{{editingEntry.registerDate}}</td>
-          <td *ngIf="(userIdValue === this.activitySelectedDatas.idResponsableUser.id) || userProfileValue === 'ADMIN'">
-            <button pTooltip="Confirmar" tooltipPosition="top" (click)="handleSubmitEditHours()">
+          <td class="btn-container-entry" *ngIf="(userIdValue === this.activitySelectedDatas.idResponsableUser.id) || userProfileValue === 'ADMIN'">
+            <button pTooltip="Confirmar" tooltipPosition="top" (click)="handleSubmitEditHours()" class="btn-check">
               <i class="pi pi-check"></i>
             </button>
             <button pTooltip="Cancelar" tooltipPosition="top" (click)="cancelEditing()">

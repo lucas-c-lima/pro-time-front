@@ -41,4 +41,41 @@
     background-color: #222;
     color: white;
   }
+
+  .title-entry{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  .inputs-container-entry{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .inputs-container-entry .p-inputtext, .input-time,
+  .inputs-container-edit-entry .p-inputtext{
+    padding: 5px;
+  }
+  .inputs-container-entry .p-calendar .p-inputtext, .input-time,
+  .inputs-container-edit-entry .p-calendar .p-inputtext{
+    width: 100px;
+    height: 40px;
+  }
+  .input-time, .input-description{
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+  }
+  .input-description{
+    width: 21.2rem;
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .inputs-container-entry .p-calendar .p-inputtext, .input-time,
+  .inputs-container-edit-entry .p-calendar .p-inputtext{
+    width: 100px;
+    height: 40px;
+  }
+
 }
